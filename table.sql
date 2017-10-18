@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `book_comment` (
   COMMENT '书Id',
   `comment`     VARCHAR(1024) NOT NULL
   COMMENT '评价内容',
-  `replay`      VARCHAR(2014) NOT NULL
+  `reply`       VARCHAR(2014) NOT NULL
   COMMENT '回复',
   `is_del`      TINYINT(1)    NOT NULL
   COMMENT '逻辑删除（用户删除）',
