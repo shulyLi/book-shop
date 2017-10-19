@@ -9,19 +9,19 @@ import java.time.LocalDateTime;
  */
 
 public class BookGood {
-    public int id;
-    public String bookName;
-    public String bookAuthor;
-    public String bookHead;
-    public int price;
-    public int sellCnt;
-    public String simpleDesc;
-    public String tag;
-    public boolean isBlack;
-    public int stock;
-    public String beterPart;
-    public String index;
-    public String detail;
+    public int      id;
+    public String   bookName;
+    public String   bookAuthor;
+    public String   bookHead;
+    public int      price;
+    public int      sellCnt;
+    public String   simpleDesc;
+    public String   tag;
+    public boolean  isBlack;
+    public int      stock;
+    public String   beterPart;
+    public String   index;
+    public String   detail;
     public LocalDateTime updateTime;
     public LocalDateTime createTime;
 

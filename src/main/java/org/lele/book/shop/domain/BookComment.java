@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
  */
 
 public class BookComment {
-    public int id;
-    public int userId;
-    public long orderNo;
-    public int bookId;
-    public String commont;
-    public String reply;
-    public boolean isDel;
-    public boolean isBlack;
+    public int      id;
+    public int      userId;
+    public long     orderNo;
+    public int      bookId;
+    public String   commont;
+    public String   reply;
+    public boolean  isDel;
+    public boolean  isBlack;
     public LocalDateTime replayTime;
     public LocalDateTime createTime;
 }
