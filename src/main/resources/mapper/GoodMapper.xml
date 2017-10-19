@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "org.lele.book.shop.dao.GoodDao">
+    <resultMap id="Good" type = "org.lele.book.shop.domain.BookGood">
+        <id column="id" property="id"/>
+        <result column="book_name" property="bookName"/>
+        <result column="book_author" property="bookAuthor"/>
+        <result column="book_head" property="bookHead"/>
+        <result column="price" property="price"/>
+        <result column="sell_cnt" property="sellCnt"/>
+        <result column="simple_desc" property="simpleDesc"/>
+        <result column="tag" property="tag"/>
+        <result column="is_black" property="isBlack"/>
+        <result column="stock" property="stock"/>
+        <result column="better_part" property="betterPart"/>
+        <result column="index" property="index"/>
+        <result column="detail" property="detail"/>
+        <result column="update_time" property="updateTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="GoodSummary" type = "org.lele.book.shop.domain.BookGoodSummary">
+        <id column="id" property="id"/>
+        <result column="book_name" property="bookName"/>
+        <result column="book_author" property="bookAuthor"/>
+        <result column="book_head" property="bookHead"/>
+        <result column="price" property="price"/>
+        <result column="sell_cnt" property="sellCnt"/>
+        <result column="simple_desc" property="simpleDesc"/>
+        <result column="tag" property="tag"/>
+        <result column="is_black" property="isBlack"/>
+        <result column="stock" property="stock"/>
+        <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+    </resultMap>
+</mapper>
+

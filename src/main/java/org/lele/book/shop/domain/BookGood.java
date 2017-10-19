@@ -19,10 +19,9 @@ public class BookGood {
     public String   tag;
     public boolean  isBlack;
     public int      stock;
-    public String   beterPart;
+    public String   betterPart;
     public String   index;
     public String   detail;
     public LocalDateTime updateTime;
     public LocalDateTime createTime;
-
 }

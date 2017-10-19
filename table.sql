@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `book_good` (
   COMMENT '拉黑(系统or我们删除)',
   `stock`       INT(11)      NOT NULL
   COMMENT '库存',
-  `beter_part`  VARCHAR(256) NOT NULL
+  `better_part`  VARCHAR(256) NOT NULL
   COMMENT '精彩章节',
   `index`       TEXT         NOT NULL
   COMMENT '目录',
