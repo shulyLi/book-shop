@@ -7,12 +7,47 @@
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="orderNo" property="orderNo"/>
-        <result column="bookId"  property="bookId"/>
+        <result column="book_id"  property="bookId"/>
         <result column="comment" property="comment"/>
         <result column="reply"   property="reply"/>
         <result column="is_del"   property="isDel"/>
         <result column="is_black" property="isBlack"/>
-        <result column="replay_time" property="replayTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        <result column="reply_time" property="replyTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
     </resultMap>
+    <sql id="sqlHead" >
+        select `id`, `user_id`, `order_no`, `book_id`, `comment`, `reply`, `is_del`, `is_black`, `reply_time`, `create_time`
+        FROM book_comment
+    </sql>
+
+    <insert id="insert" parameterType="org.lele.book.shop.domain.BookComment" keyProperty="id" useGeneratedKeys="true">
+        insert into book_comment(`user_id`, `order_no`, `book_id`, `comment`, `is_del`, `is_black` )
+        VALUES (
+            #{userId}, #{ordrNo}, #{bookId}, #{comment}, #{isDel}, #{isBlack},
+        )
+    </insert>
+
+    <update id="updateReplay" parameterType="map">
+        UPDATE book_comment SET reply = #{reply}, `reply_time` = CURRENT_TIMESTAMP
+        WHERE ordr_no = #{ordrNo}
+    </update>
+
+    <select id="selectByOrderNo" parameterType="long" resultMap="BookComment">
+        <include refid="sqlHead"/>
+        WHERE  order_no = #{order_no}
+    </select>
+
+    <select id="selectByUserId" parameterType="map" resultMap="BookComment">
+        <include refid="sqlHead"/>
+        WHERE user_id = #{userId} and id &lt; #{flag}
+        ORDER By id desc
+        LIMIT #{size}
+    </select>
+
+    <select id="selectByBookId" parameterType="map" resultMap="BookComment">
+        <include refid="sqlHead"/>
+        WHERE book_id = #{bookId} and id &lt; #{flag}
+        ORDER By id desc
+        LIMIT #{size}
+    </select>
 </mapper>

@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 /**
  * author  shuly
- * date    17-10-18
+ * date    17-10-20
  * description:
  */
 
-public class BookGood extends StringView {
+public class BookGoodSummary extends StringView {
     public int      id;
     public String   bookName;
     public String   bookAuthor;
@@ -21,9 +21,5 @@ public class BookGood extends StringView {
     public String   tag;
     public boolean  isBlack;
     public int      stock;
-    public String   betterPart;
-    public String   index;
-    public String   detail;
-    public LocalDateTime updateTime;
     public LocalDateTime createTime;
 }

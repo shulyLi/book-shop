@@ -7,4 +7,5 @@ package org.lele.book.shop.domain.help;
  */
 
 public enum Operator {
+    System, Admin_Hand;
 }

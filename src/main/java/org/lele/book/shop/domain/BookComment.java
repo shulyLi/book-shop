@@ -1,5 +1,7 @@
 package org.lele.book.shop.domain;
 
+import org.lele.book.shop.commen.StringView;
+
 import java.time.LocalDateTime;
 
 /**
@@ -8,15 +10,15 @@ import java.time.LocalDateTime;
  * description:
  */
 
-public class BookComment {
+public class BookComment extends StringView {
     public int      id;
     public int      userId;
     public long     orderNo;
-    public int      bookId;
+    public int      goodId;
     public String   commont;
     public String   reply;
     public boolean  isDel;
     public boolean  isBlack;
-    public LocalDateTime replayTime;
+    public LocalDateTime replyTime;
     public LocalDateTime createTime;
 }

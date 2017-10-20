@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS `book_order` (
   COMMENT '用户Id',
   `order_no`    BIGINT      NOT NULL
   COMMENT '订单号',
+  `book_id`     INT(11)     NOT NULL
+  COMMENT '书ID',
   `state`       TINYINT(2)  NOT NULL
   COMMENT '订单状态',
   `pay_type`    TINYINT(2)  NOT NULL
@@ -117,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `book_comment` (
   COMMENT '逻辑删除（用户删除）',
   `is_black`    TINYINT(1)    NOT NULL
   COMMENT '拉黑，防止和谐词汇',
-  `replay_time` DATETIME      NOT NULL
+  `reply_time` DATETIME
   COMMENT '回复时间',
   `create_time` DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

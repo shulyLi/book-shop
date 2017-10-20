@@ -1,5 +1,6 @@
 package org.lele.book.shop.domain;
 
+import org.lele.book.shop.commen.StringView;
 import org.lele.book.shop.domain.help.UserType;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  * description:
  */
 
-public class BookUser {
+public class BookUser extends StringView {
     public int      id;
     public String   email;
     public String   passWord;

@@ -7,4 +7,9 @@ package org.lele.book.shop.domain.help;
  */
 
 public enum State {
+    Submit,
+    Accept,
+    Refuse,
+    Dispatch,
+    Complete
 }

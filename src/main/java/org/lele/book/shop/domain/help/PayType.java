@@ -7,4 +7,8 @@ package org.lele.book.shop.domain.help;
  */
 
 public enum PayType {
+    WX_Pay,     // 威信
+    Ali_Pay,    // 支付宝
+    QQ_Pay,     // QQ
+    Balance_Pay // 余额
 }

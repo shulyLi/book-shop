@@ -1,5 +1,6 @@
 package org.lele.book.shop.domain;
 
+import org.lele.book.shop.commen.StringView;
 import org.lele.book.shop.domain.help.Operator;
 import org.lele.book.shop.domain.help.State;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  * description:
  */
 
-public class BookOrderHistory {
+public class BookOrderHistory extends StringView {
     public int      id;
     public long     orderNo;
     public State    state;

@@ -34,5 +34,89 @@
         <result column="stock" property="stock"/>
         <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
     </resultMap>
-</mapper>
+    <sql id="sqlMain">
+        select `id`, `book_name`, `book_author`, `book_head`, `price`, `sell_cnt`, `simple_desc`,
+               `tag`, `is_black`, `stock`, `better_part`, `index`, `detail`, `update_time`, `create_time`
+        from book_good
+    </sql>
+    <sql id="sqlSummary">
+        select `id`, `book_name`, `book_author`, `book_head`, `price`, `sell_cnt`, `simple_desc`, `tag`, `is_black`, `stock`,
+               `create_time`
+        from book_good
+    </sql>
+    <insert id="insert" parameterType="org.lele.book.shop.domain.BookGood" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO book_good(
+          `book_name`, `book_author`, `book_head`, `price`, `sell_cnt`, `simple_desc`,
+          `tag`, `is_black`, `stock`, `better_part`, `index`, `detail`
+        ) VALUES (
+          #{bookName}, #{bookAuthor}, #{bookHead},
+          #{price}, #{sellCnt}, #{simpleDesc},
+          #{tag}, #{isBlack}, #{stock},
+          #{betterPart}, #{index}, #{detail}
+        )
+    </insert>
 
+    <update id="update" parameterType="map">
+        update book_good
+        <set>
+            <if test="bookName != null">
+                book_name = #{bookName}
+            </if>
+            <if test="bookAuthor != null">
+                book_author = #{bookAuthor}
+            </if>
+            <if test="bookHead != null">
+                book_head = #{bookHead}
+            </if>
+            <if test="price != null">
+                price = #{price}
+            </if>
+            <if test="simpleDesc != null">
+                simple_desc = #{simpleDesc}
+            </if>
+            <if test="tag != null">
+                tag = #{tag}
+            </if>
+            <if test="is_black != null">
+                isBlack = #{isBlack}
+            </if>
+            <if test="stock != null">
+                stock = #{stock}
+            </if>
+            <if test="betterPart != null">
+                betterPart = #{betterPart}
+            </if>
+            <if test="index != null">
+                index = #{index}
+            </if>
+            <if test="detail != null">
+                detail = #{detail}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <update id="hadSell" parameterType="int">
+        update book_good
+        set sell_cnt = sell_cnt + 1
+        WHERE id = #{id}
+    </update>
+
+    <select id="select" parameterType="id" resultMap="Good">
+        <include refid="sqlMain"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectIndex" parameterType="map" resultMap="GoodSummary">
+        <include refid="sqlSummary"/>
+        WHERE id &lt; #{flag}
+        ORDER by sell_cnt desc
+        limit #{size}
+    </select>
+
+    <select id="selectList" parameterType="map" resultMap="GoodSummary">
+        <include refid="sqlSummary"/>
+        WHERE id &lt; #{flag}
+        ORDER by id desc
+        limit #{size}
+    </select>
+</mapper>

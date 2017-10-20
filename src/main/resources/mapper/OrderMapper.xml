@@ -18,12 +18,70 @@
     <resultMap id="OrderHistory" type="org.lele.book.shop.domain.BookOrderHistory">
         <id column="id" property="id"/>
         <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
         <result column="state" property="state" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="message" property="message"/>
         <result column="operator" property="operator" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
     </resultMap>
 
+    <sql id="sqlMain">
+        select `order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `phone`, `address`, `detail`, `create_time`
+        from `book_order`
+    </sql>
+
+    <sql id="sqlHistory">
+        select `id`, `order_no`, `user_id`, `state`, `message`, `operator`, `create_time`
+        from `book_order_history`
+    </sql>
+
+    <insert id="insert" parameterType="org.lele.book.shop.domain.BookOrder">
+        INSERT INTO book_order(`order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `phone`, `address`, `detail`)
+        VALUES (#{orderNo}, #{userId},
+          #{state typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{payType typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{payFee}, #{phone}, #{address}, #{detail}
+        )
+    </insert>
+
+    <insert id="insertHistory" parameterType="org.lele.book.shop.domain.BookOrderHistory" keyProperty="true" useGeneratedKeys="true">
+        INSERT INTO book_order_history(`order_no`, `user_id`, `state`, `message`, `operator`)
+        VALUES (#{orderNo}, #{userId},
+          #{state typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{message},
+          #{operator typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}
+        )
+    </insert>
+
+    <update id="updateOrder" parameterType="map" >
+        UPDATE book_order
+        SET `state` = #{state}
+        WHERE order_no = #{orderNo}
+    </update>
+
+    <select id="selectByUserId" parameterType="map" resultMap="Order">
+        <include refid="sqlMain" />
+        WHERE user_id = #{userId} and order_no &lt; #{flag}
+        ORDER BY order_no desc
+        limit #{size}
+    </select>
+
+    <select id="selectByBookId" parameterType="map" resultMap="Order">
+        <include refid="sqlMain" />
+        WHERE book_id = #{bookId} and order_no &lt; #{flag}
+        ORDER BY order_no desc
+        limit #{size}
+    </select>
+
+    <select id="select" parameterType="map" resultMap="Order">
+        <include refid="sqlMain" />
+        WHERE order_no = #{orderNo}
+    </select>
+
+    <select id="selectHistory" parameterType="map" resultMap="OrderHistory">
+        <include refid="sqlHistory"/>
+        WHERE order_no = #{orderNo}
+    </select>
 </mapper>
 
 
