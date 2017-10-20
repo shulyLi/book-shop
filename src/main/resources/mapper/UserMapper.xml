@@ -24,7 +24,7 @@
     <insert id="insert" parameterType="org.lele.book.shop.domain.BookUser" useGeneratedKeys="true" keyProperty="id">
         insert into book_user(`email`, `pass_word`, `user_name`, `user_head`, `user_mark`, `user_type`, `is_del`, `is_black`)
         VALUES (#{email}, #{passWord}, #{userName}, #{userHead}, #{userMark},
-        #{userType typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+        #{userType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
         #{isDel}, #{isBlack})
     </insert>
 

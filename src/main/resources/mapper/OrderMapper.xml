@@ -38,8 +38,8 @@
     <insert id="insert" parameterType="org.lele.book.shop.domain.BookOrder">
         INSERT INTO book_order(`order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `phone`, `address`, `detail`)
         VALUES (#{orderNo}, #{userId},
-          #{state typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
-          #{payType typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{state, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{payType, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
           #{payFee}, #{phone}, #{address}, #{detail}
         )
     </insert>
@@ -47,9 +47,9 @@
     <insert id="insertHistory" parameterType="org.lele.book.shop.domain.BookOrderHistory" keyProperty="true" useGeneratedKeys="true">
         INSERT INTO book_order_history(`order_no`, `user_id`, `state`, `message`, `operator`)
         VALUES (#{orderNo}, #{userId},
-          #{state typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+          #{state, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
           #{message},
-          #{operator typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}
+          #{operator, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler}
         )
     </insert>
 
