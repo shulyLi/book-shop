@@ -1,4 +1,4 @@
-package org.lele.book.shop.controller;
+package org.lele.book.shop.controller.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

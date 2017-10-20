@@ -1,4 +1,4 @@
-package org.lele.book.shop.controller;
+package org.lele.book.shop.controller.exception;
 
 
 import com.google.common.net.MediaType;
