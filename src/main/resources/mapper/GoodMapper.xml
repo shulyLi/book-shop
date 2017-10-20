@@ -101,7 +101,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="select" parameterType="id" resultMap="Good">
+    <select id="select" parameterType="int" resultMap="Good">
         <include refid="sqlMain"/>
         WHERE id = #{id}
     </select>
