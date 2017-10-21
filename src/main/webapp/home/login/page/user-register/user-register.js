@@ -27,14 +27,15 @@ define([
                 alert("名字长度[4,)");
                 return ;
             }
-            if(word.length<5||word.length>20){
-                alert("密码长度范围[5,20]")
-                return ;
-            }
-            if(word != rewd){
+            if(word === null || reword === null ||word !== rewd){
                 alert("俩次密码不一样啊");
                 return ;
             }
+            if(word.length<5||word.length>20){
+                alert("密码长度范围[5,20]");
+                return ;
+            }
+
             var param = {
                 'email' : email,
                 'password' : word
