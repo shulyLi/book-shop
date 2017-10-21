@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CommentController {
     private Logger logger = LoggerFactory.getLogger(CommentController.class);
 
-
     @RequestMapping(value = "/{orderNo}", method = RequestMethod.POST)
     public ResponseEntity create(@PathVariable("orderNo") String orderNo) {
         return ResponseEntity.noContent().build();
@@ -42,8 +41,8 @@ public class CommentController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
-    public ResponseEntity listUser(@PathVariable("bookId") String bookId) {
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public ResponseEntity listUser(@PathVariable("userId") String userId) {
         return ResponseEntity.noContent().build();
     }
 

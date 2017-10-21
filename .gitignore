@@ -7,3 +7,4 @@ tester.log
 *.iml
 logs/
 *.log
+*config.properties

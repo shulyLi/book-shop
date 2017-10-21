@@ -1,13 +1,13 @@
 require.config({
     baseUrl: '/home/',
-    appDir: 'appDir',
+    appDir: 'login',
     paths: {
         zepto: 'static/zepto',
         underscore: 'static/underscore',
         backbone: 'static/backbone',
         jquery: 'static/jquery',
-        app: 'appDir/app',
-        router: 'appDir/router',
+        app: 'login/app',
+        router: 'login/router',
         text: 'static/text',
         ShulyTool:'static/ShulyTool'
     },

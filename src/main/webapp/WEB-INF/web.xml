@@ -61,6 +61,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/home/appDir/view/index.html</welcome-file>
+        <welcome-file>/view/index.html</welcome-file>
     </welcome-file-list>
+
 </web-app>
