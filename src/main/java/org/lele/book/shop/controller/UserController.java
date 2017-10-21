@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * author  shuly
@@ -30,16 +33,18 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity register(UserRegisterEntity entity) {
         entity.checkAndFull();
-        logger.info("user [{}] register", entity.email);
-        return ResponseEntity.ok(userService.userRegister(entity.password, entity.email, entity.userName));
+        logger.info("user [{}->{}] register", entity.email, entity.userName);
+
+        Long sso = userService.userRegister(entity.password, entity.email, entity.userName);
+        return ResponseEntity.ok(sso);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity login(UserLoginEntity entity){
+    public ResponseEntity login(UserLoginEntity entity,  HttpServletRequest httpRequest, HttpServletResponse response){
         entity.checkAndFull();
-
         logger.info("user [{}] login", entity.email);
-        return ResponseEntity.ok(userService.userLogin(entity.password, entity.email));
+        Long sso = userService.userLogin(entity.password, entity.email);
+        return ResponseEntity.ok(sso);
     }
 
     // 下面的 先不 維護

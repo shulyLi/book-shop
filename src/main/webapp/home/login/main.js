@@ -6,6 +6,7 @@ require.config({
         underscore: 'static/underscore',
         backbone: 'static/backbone',
         jquery: 'static/jquery',
+        cookie: 'static/cookie',
         app: 'login/app',
         router: 'login/router',
         text: 'static/text',

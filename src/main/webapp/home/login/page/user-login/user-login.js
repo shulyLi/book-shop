@@ -1,8 +1,7 @@
 define([
-    'zepto', 'underscore', 'backbone',
+    'jquery', 'cookie', 'underscore', 'backbone',
     'text!login/page/user-login/user-login.html', 'ShulyTool'
-
-], function ($, _, Backbone, html, ShulyTool) {
+], function ($, cookie, _, Backbone, html, ShulyTool) {
     return Backbone.View.extend({
         id: 'user-login',
         fragment: document.createDocumentFragment(),
@@ -30,7 +29,11 @@ define([
                 'password': pswd
             };
             ShulyTool.run('/console/user/login', 'GET', true, param, function (data) {
-                // todo
+                $.cookie("user-sso", data, {
+                    path:"/"
+                });
+                console.log($.cookie("user-sso"));
+                window.location.href = "/"
             }, null);
         },
         render: function () {
