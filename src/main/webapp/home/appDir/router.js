@@ -12,7 +12,7 @@ define(['zepto', 'underscore', 'backbone', 'router'], function ($, _, Backbone) 
         },
         handleRoute: function (action, query, state) {
             console.log(action, query, state);
-            action = action || 'shell-show-home';
+            action = action || 'book-index';
             require(['appDir/page/' + action + '/' + action], function (Page) {
                 navigate(Page, query, state);
             });

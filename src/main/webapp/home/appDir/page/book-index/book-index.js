@@ -1,10 +1,10 @@
 define([
     'zepto', 'underscore', 'backbone',
-    'text!appDir/page/shell-list-run-state/shell-list-run-state.html'
+    'text!appDir/page/book-index/book-index.html'
 ], function ($, _, Backbone, html) {
 
     return Backbone.View.extend({
-        id: 'shell-list-run-state',
+        id: 'book-index',
         fragment: document.createDocumentFragment(),
         $pageWrapper: $('#page-wrapper'),
         template: _.template(html),
@@ -19,7 +19,7 @@ define([
             this.setElement(this.$pageWrapper.find('#' + this.id));
         },
         destroy: function () {
-            console.log("destroy shell-list-run-state");
+            console.log("destroy book-index");
         }
     });
 
