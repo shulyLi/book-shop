@@ -20,7 +20,7 @@ define([],function () {
             },
             error:function(xhr,textStatus){
                 console.log(xhr);
-                //alert("错误代码:" + xhr.status + "\n具体错误:" + xhr.responseJSON.err+ "\n具体信息:" + xhr.responseJSON.msg);
+                alert("错误代码:" + xhr.status + "\n具体错误:" + xhr.responseJSON.err+ "\n具体信息:" + xhr.responseJSON.msg);
             },
             complete:function() {
                 sleep(1);

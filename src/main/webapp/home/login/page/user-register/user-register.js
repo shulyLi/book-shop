@@ -23,11 +23,16 @@ define([
             var email = $("#email").val();
             var word = $("#password").val();
             var rewd = $("#rewd").val();
+            var name = $("#name").val();
             if(email.length < 4){
+                alert("郵箱长度[4,)");
+                return ;
+            }
+            if(name.length < 4){
                 alert("名字长度[4,)");
                 return ;
             }
-            if(word === null || reword === null ||word !== rewd){
+            if(word === null || rewd === null ||word !== rewd){
                 alert("俩次密码不一样啊");
                 return ;
             }
@@ -35,10 +40,10 @@ define([
                 alert("密码长度范围[5,20]");
                 return ;
             }
-
             var param = {
                 'email' : email,
-                'password' : word
+                'password' : word,
+                'userName' : name
             };
             ShulyTool.run('/console/user/register', 'POST', true, param, function(data) {
                 // todo

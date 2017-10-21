@@ -22,4 +22,14 @@ public class BookUser extends StringView {
     public boolean  isDel;
     public boolean  isBlack;
     public LocalDateTime  createTime;
+
+
+
+    public void defaultValue(){
+        userHead = "None";
+        userMark = "None";
+        userType = UserType.Purple;
+        isDel    = false;
+        isBlack  = false;
+    }
 }

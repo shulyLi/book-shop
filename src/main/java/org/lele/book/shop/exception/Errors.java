@@ -6,6 +6,8 @@ import java.util.Map;
 
 public enum Errors {
     NoSuchOrder(404, "NoSuchOrder", "The specified order does not exist."),
+    MailHasUsed(404, "MailHasUsed", "the mail has used"),
+    NoSuchUser(403, "NoSuchUser", "The specified user does not exist."),
     MissingContentLength(400, "MissingContentLength", "You must provide the Content-Length HTTP header."),
     MissingRequiredParameter(400, "MissingRequiredParameter", "Your request is missing a required parameter."),
     MalformedJson(400, "MalformedJson", "The JSON you provided was not well-formed or did not validate against our published schema."),
@@ -18,7 +20,6 @@ public enum Errors {
     IncorrectAmount(409, "IncorrectAmount", "Incorrect payment amount."),
     MethodNotAllowed(405, "MethodNotAllowed", "The specified method is not allowed against this resource."),
     InternalError(500, "InternalError", "We encountered an internal error. Please try again.");
-
     int httpCode;
     Map<String, String> err = new LinkedHashMap<>();
     String code;

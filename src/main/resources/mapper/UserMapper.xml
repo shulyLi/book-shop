@@ -60,13 +60,13 @@
         <include refid="sqlHead"/>
         <where>
             <if test="id != null">
-                id = #{id}
+                 id = #{id}
             </if>
             <if test="email != null">
-                email = #{email}
+                and email = #{email}
             </if>
             <if test="passWord != null">
-                pass_word = #{passWord}
+                and pass_word = #{passWord}
             </if>
         </where>
     </select>
@@ -75,14 +75,14 @@
         <include refid="sqlHead"/>
         <where>
             <if test="email != null">
-                email = #{email}
+                  email = #{email}
             </if>
             <if test="userName != null">
-                user_name = #{userName}
+                and  user_name = #{userName}
             </if>
 
             <if test="1 != 2">
-                id &lt; #{flag}
+                and  id &lt; #{flag}
             </if>
         </where>
         order by id desc
