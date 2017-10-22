@@ -1,4 +1,4 @@
-define(['zepto', 'underscore', 'backbone', 'router'], function ($, _, Backbone) {
+define(['zepto', 'underscore', 'backbone'], function ($, _, Backbone) {
     var currentPage = null;
 
     function navigate(Page, query, state) {
@@ -13,7 +13,7 @@ define(['zepto', 'underscore', 'backbone', 'router'], function ($, _, Backbone) 
         handleRoute: function (action, query, state) {
             console.log(action, query, state);
             action = action || 'book-index';
-            require(['appDir/page/' + action + '/' + action], function (Page) {
+            require(['almost/page/' + action + '/' + action], function (Page) {
                 navigate(Page, query, state);
             });
         }

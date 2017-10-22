@@ -1,14 +1,16 @@
 require.config({
     baseUrl: '/home/',
-    appDir: 'appDir',
+    appDir: 'almost',
     paths: {
         zepto: 'static/zepto',
         underscore: 'static/underscore',
         backbone: 'static/backbone',
-        jquery: 'static/jquery',
-        app: 'appDir/app',
-        router: 'appDir/router',
         text: 'static/text',
+        'page-manager': 'static/page-manager',
+        md5: 'static/md5',
+        app: 'almost/app',
+        router: 'almost/router',
+     //   wechatShare: 'static/wechatShare',
         ShulyTool:'static/ShulyTool'
     },
     shim: {
@@ -25,6 +27,8 @@ require.config({
         },
         modules: []
     },
+    optimizeAllPluginResources: true,
+    excludeShallow: '',
     waitSeconds: 0,
     urlArgs: 'v=1.0.0'
 });
@@ -34,3 +38,4 @@ require(['zepto', 'app'], function ($, App) {
         App.initialize();
     });
 });
+window.hostIp = "";
