@@ -2,11 +2,10 @@ require.config({
     baseUrl: '/home/',
     appDir: 'login',
     paths: {
-        zepto: 'static/zepto',
-        underscore: 'static/underscore',
-        backbone: 'static/backbone',
         jquery: 'static/jquery',
         cookie: 'static/cookie',
+        underscore: 'static/underscore',
+        backbone: 'static/backbone',
         app: 'login/app',
         router: 'login/router',
         text: 'static/text',
@@ -16,7 +15,7 @@ require.config({
         'backbone': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['underscore', 'zepto'],
+            deps: ['underscore', 'jquery'],
             //Once loaded, use the global 'Backbone' as the
             //module value.
             exports: 'Backbone'
@@ -30,7 +29,7 @@ require.config({
     urlArgs: 'v=1.0.0'
 });
 
-require(['zepto', 'app'], function ($, App) {
+require(['jquery', 'app'], function ($, App) {
     $(function () {
         App.initialize();
     });

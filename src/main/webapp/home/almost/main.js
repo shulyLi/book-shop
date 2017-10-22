@@ -2,16 +2,21 @@ require.config({
     baseUrl: '/home/',
     appDir: 'almost',
     paths: {
+        jquery: 'static/jquery',
         zepto: 'static/zepto',
+        cookie: 'static/cookie',
         underscore: 'static/underscore',
         backbone: 'static/backbone',
-        text: 'static/text',
-        'page-manager': 'static/page-manager',
-        md5: 'static/md5',
         app: 'almost/app',
         router: 'almost/router',
-     //   wechatShare: 'static/wechatShare',
-        ShulyTool:'static/ShulyTool'
+        text: 'static/text',
+        ShulyTool:'static/ShulyTool',
+        md5:'static/md5',
+
+
+        select2: 'static/select2',
+        bootstrap: 'static/bootstrap',
+        ALT: 'static/ALT'
     },
     shim: {
         'backbone': {
@@ -25,6 +30,12 @@ require.config({
         'underscore': {
             exports: '_'
         },
+        'jquery': {
+            exports: 'jQuery',
+        },
+        'ALT': {
+            deps: ['jquery', 'bootstrap']
+        },
         modules: []
     },
     optimizeAllPluginResources: true,
@@ -33,7 +44,7 @@ require.config({
     urlArgs: 'v=1.0.0'
 });
 
-require(['zepto', 'app'], function ($, App) {
+require(['jquery', 'app'], function ($, App) {
     $(function () {
         App.initialize();
     });

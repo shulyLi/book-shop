@@ -1,4 +1,4 @@
-define(['zepto', 'underscore', 'backbone'], function ($, _, Backbone) {
+define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
     var currentPage = null;
 
     function navigate(Page, query, state) {

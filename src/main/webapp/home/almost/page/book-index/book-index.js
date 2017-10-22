@@ -1,7 +1,7 @@
 define([
-    'zepto', 'underscore', 'backbone','ShulyTool',
+    'underscore', 'backbone','ShulyTool',
     'text!almost/page/book-index/book-index.html'
-], function (ignore, _, Backbone, ShulyTool, html) {
+], function ( _, Backbone, ShulyTool, html) {
 
     return Backbone.View.extend({
         id: 'book-index',

@@ -1,11 +1,15 @@
 // Filename: app.js
 define([
-    'zepto',
+    'jquery',
     'underscore',
     'backbone',
-    'page-manager',
+
+    'select2',
+    'bootstrap',
+    'ALT',
+
     'router',
-    'md5'
+    'md5',
 ], function ($, _, Backbone) {
     var initialize = function () {
         Backbone.history.start();
