@@ -135,7 +135,7 @@ define([
         },
 
         destroy: function () {
-            console.log("destroy shell-show-home");
+            console.log("destroy book-good-manager");
         }
     });
 });

@@ -16,12 +16,12 @@ import java.util.Map;
 public class BookGood extends StringView {
     public int id;
     public String bookName;
+    public String tag;
     public String bookAuthor;
     public String bookHead;
     public int price;
     public int sellCnt;
     public String simpleDesc;
-    public String tag;
     public boolean isBlack;
     public int stock;
     public String betterPart;

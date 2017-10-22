@@ -56,7 +56,7 @@ define([
         start: function () {
         },
         destroy: function () {
-            console.log("destroy shell-show-home");
+            console.log("destroy user-register");
         }
 
     });
