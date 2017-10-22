@@ -32,25 +32,25 @@
         update book_user
         <set>
             <if test="passWord != null">
-                pass_word = #{passWord}
+                pass_word = #{passWord},
             </if>
             <if test="userName != null">
-                user_name = #{userName}
+                user_name = #{userName},
             </if>
             <if test="userHead != null">
-                user_head = #{userHead}
+                user_head = #{userHead},
             </if>
             <if test="userMark != null">
-                user_mark = #{userMark}
+                user_mark = #{userMark},
             </if>
             <if test="isDel != null">
-                is_del = #{isDel}
+                is_del = #{isDel},
             </if>
             <if test="userType != null">
-                userType = #{userType}
+                userType = #{userType},
             </if>
             <if test="isBlack != null">
-                is_black = #{isBlack}
+                is_black = #{isBlack},
             </if>
         </set>
     </update>

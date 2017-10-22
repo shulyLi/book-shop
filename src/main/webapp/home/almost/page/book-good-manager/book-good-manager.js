@@ -22,6 +22,8 @@ define([
             this.setElement(this.$pageWrapper.find('#' + this.id));
             $("#tag").select2();
             this.start();
+            $("#good-submit").unbind("click");
+            $("#good-submit").click(this.postHttpBook);
         },
 
         start: function () {
@@ -42,7 +44,6 @@ define([
                     {"data": "stock"}
                 ],
             });
-
             var resolve = this.resolve;
             $('#dataTable tbody').on( 'click', 'tr', function () {
                 if ($(this).hasClass('selected') ) {
@@ -60,26 +61,24 @@ define([
             console.log("create Book");
             $("#book-id").val("");
             $("#book-modal").modal("show");
-            $("#good-submit").unbind("click")
-            $("#good-submit").click(this.postHttpBook);
+
         },
         resolve: function(goodId) {
             console.log("changeId : " +  goodId);
             $("#book-id").val(goodId);
             ShulyTool.run("/console/good/" + goodId, "GET", false, null, function (data) {
                 $("#book-modal").modal("show");
-                $("#good-submit").unbind("click")
-                $("#good-submit").click(this.postHttpBook);
                 $.each(data, function(name, value) {
                     if (name === 'id' || name === "bookHead") return;
-                    $(name).val(value)
+                    if (name === 'tag') return;
+                    $("#" + name).val(value)
                 });
             }, null);
         },
         postHttpBook: function () {
+            var start = this.start;
             var goodId =  $("#book-id").val();
             console.log("apply : " +  goodId);
-
             var tagStr = $("#tag").select2('val');
             if (tagStr === null) {
                 tagStr = "";
@@ -97,7 +96,7 @@ define([
                 betterPart:  $("#betterPart").val(),
                 index:  $("#index").val(),
                 detail:  $("#detail").val(),
-            }
+            };
             if (goodId == "") { // 创建
                 console.log("创建 : " +  goodId);
                 ShulyTool.run("/console/good", "POST", false, param, function (data) {
@@ -110,6 +109,26 @@ define([
                 }, null);
             }
 
+            var dttable = $('#dataTable').dataTable();
+            dttable.fnClearTable(); //清空一下table
+            dttable.fnDestroy(); //还原初始化了的datatable
+            $("#dataTable").dataTable({
+                "lengthChange": false,
+                "searching": true,
+                "autoWidth": false,
+                bJQueryUI:true,
+                ajax:  "/console/good/list/summary",
+                rowId: 'id',
+                columns:[
+                    {"data": "id" },
+                    {"data": "bookName"},
+                    {"data": "bookAuthor"},
+                    {"data": "price"},
+                    {"data": "sellCnt"},
+                    {"data": "tag"},
+                    {"data": "stock"}
+                ],
+            });
         },
         uploadPic: function () {
             console.log("uploadPic")

@@ -62,26 +62,29 @@ define([
                 tags : tagStr
 
             };
+            var appendStr = this.appendStr;
+            var addRow = this.addRow;
+            var num = this.num;
+            var pageNum = this.pageNum;
+            var father  = this.father;
             ShulyTool.run("/console/good/index/summary", "GET", false, param, function (data) {
                 $.each(data, function (idx, value) {
-                    if(this.num %4 === 0){
-                        this.addRow();
+                    if(num %4 === 0){
+                        father = addRow(num);
                     }
-                    this.append(value);
-                    this.num++;
+                    father.append(appendStr(value));
+                    num++;
                 });
-                this.pageNum++;
+                pageNum++;
             }, null);
         },
-
-
-        addRow: function() {
-            var id="father"+num;
+        addRow: function(num) {
+            var id = "father" + num;
             var rowStr='<div class="row Delete" id ="'+id+'"> </div>';
             $("#book-body").append(rowStr);
-            this.father = $("#"+id);
+            return $("#"+id);
         },
-        append: function (data) {
+        appendStr: function (data) {
             var divStr=
                 '<section class="col-sm-3 box-primry">'+
                     '<div class="box" >'+
@@ -94,12 +97,12 @@ define([
                             '</a>'+
                         '</div>'+
                         '<div class="box-footer">' +
-                            '<p >'+item.tag+'</p>'+
+                            '<p >'+data.tag+'</p>'+
                             '<p >销量：'+data.sellCnt+'，作者:'+data.bookAuthor+'</p>'+
                         '</div>'+
                     '</div>'+
                 '</section>';
-            this.father.append(divStr);
+            return divStr;
         },
         destroy: function () {
             console.log("destroy book-index");

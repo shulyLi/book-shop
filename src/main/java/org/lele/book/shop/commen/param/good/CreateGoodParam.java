@@ -1,6 +1,5 @@
 package org.lele.book.shop.commen.param.good;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.lele.book.shop.commen.Assert;
 import org.lele.book.shop.commen.param.ControllerParam;
 import org.lele.book.shop.domain.BookGood;
@@ -13,17 +12,6 @@ import org.springframework.util.StringUtils;
  * @date 2017/10/22.
  */
 public class CreateGoodParam extends BookGood implements ControllerParam {
-    public int      id;
-    public String   bookName;
-    public String   bookAuthor;
-    public String   bookHead;
-    public int      price;
-    public String   simpleDesc;
-    public String   tag;
-    public int      stock;
-    public String   betterPart;
-    public String   index;
-    public String   detail;
     @Override
     public void checkAndFull() throws BookShopSystemException {
         Assert.assertion(id == 0 , Errors.InvalidArgument, "id 不是 0");

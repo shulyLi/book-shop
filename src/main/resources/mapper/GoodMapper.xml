@@ -60,37 +60,37 @@
         update book_good
         <set>
             <if test="bookName != null">
-                book_name = #{bookName}
+                book_name = #{bookName},
             </if>
             <if test="bookAuthor != null">
-                book_author = #{bookAuthor}
+                book_author = #{bookAuthor},
             </if>
             <if test="bookHead != null">
-                book_head = #{bookHead}
+                book_head = #{bookHead},
             </if>
             <if test="price != null">
-                price = #{price}
+                price = #{price},
             </if>
             <if test="simpleDesc != null">
-                simple_desc = #{simpleDesc}
+                simple_desc = #{simpleDesc},
             </if>
             <if test="tag != null">
-                tag = #{tag}
+                tag = #{tag},
             </if>
-            <if test="is_black != null">
-                isBlack = #{isBlack}
+            <if test="isBlack != null">
+                is_black = #{isBlack},
             </if>
             <if test="stock != null">
-                stock = #{stock}
+                stock = #{stock},
             </if>
             <if test="betterPart != null">
-                betterPart = #{betterPart}
+                better_part = #{betterPart},
             </if>
             <if test="index != null">
-                index = #{index}
+                `index` = #{index},
             </if>
             <if test="detail != null">
-                detail = #{detail}
+                detail = #{detail},
             </if>
         </set>
         WHERE id = #{id}
