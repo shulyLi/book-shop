@@ -6,6 +6,7 @@ import java.util.Map;
 
 public enum Errors {
     NoSuchOrder(404, "NoSuchOrder", "The specified order does not exist."),
+    NoSuchBook(404, "NoSuchBook", "The specified book does not exist."),
     MailHasUsed(404, "MailHasUsed", "the mail has used"),
     NoSuchUser(403, "NoSuchUser", "The specified user does not exist."),
     MissingContentLength(400, "MissingContentLength", "You must provide the Content-Length HTTP header."),

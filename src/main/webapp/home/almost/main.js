@@ -12,11 +12,11 @@ require.config({
         text: 'static/text',
         ShulyTool:'static/ShulyTool',
         md5:'static/md5',
-
-
         select2: 'static/select2',
         bootstrap: 'static/bootstrap',
-        ALT: 'static/ALT'
+        ALT: 'static/ALT',
+        datatables : "static/jquery.dataTables",
+        datatablesboot: "static/dataTables.bootstrap"
     },
     shim: {
         'backbone': {
@@ -31,10 +31,21 @@ require.config({
             exports: '_'
         },
         'jquery': {
-            exports: 'jQuery',
+            exports : 'jQuery'
         },
+        'bootstrap': {
+            deps: ['jquery']
+        },
+
+
         'ALT': {
             deps: ['jquery', 'bootstrap']
+        },
+        'datatables': {
+            deps: ['jquery', 'bootstrap', 'ALT'], exports: "datatables"
+        },
+        'datatablesboot' : {
+            deps: ['jquery', 'datatables']
         },
         modules: []
     },

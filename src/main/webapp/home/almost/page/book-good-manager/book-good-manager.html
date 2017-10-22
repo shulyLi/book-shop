@@ -1,0 +1,133 @@
+<div id="book-good-manager">
+    <section class="content-header">
+        <h1>
+            学海
+            <small>building</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">书籍管理</li>
+        </ol>
+    </section>
+    <section class="content">
+        <row>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">书籍管理</h3>
+                    <button type="button" id = "book-create" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-creative-commons"></i> 创建书</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <row>
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th data-field="id">id</th>
+                                <th data-field="bookName">书名</th>
+                                <th data-field="bookAuthor">作者</th>
+                                <th data-field="price">价钱</th>
+                                <th data-field="sellCnt">销量</th>
+                                <th data-field="tag">标签</th>
+                                <th data-field="stock">库存</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </row>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </row>
+    </section>
+</div>
+
+<div class="modal fade" id="book-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body col-md-12">
+                <div class="box-body">
+                    <form role="form" id="book-apply-form">
+                            <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-12">
+                                    <input class="col-sm-6" type="file" disabled="disabled" id="choose-pic" name="pic"/>
+                                    <button type="button"  id = "book-pic-submit" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-upload"></i> 替换图片</button>
+                                </div>
+                                <img id="bookHead" name="bookHead" width="100%" height="100%" src="/upload/book/timg.jpg">
+                            </div>
+                            <div class=" col-sm-6">
+                                    <input  type="hidden" class="form-control" id="book-id" name="id"
+                                            placeholder="输入">
+                                <div class="form-group ">
+                                    <label for="bookName">书名</label>
+                                    <input  type="text" class="form-control" id="bookName" name="bookName"
+                                           placeholder="输入">
+                                </div>
+                                <div class="form-group">
+                                    <label>简述</label>
+                                    <input type="text" class="form-control" id="simpleDesc" name="simpleDesc"
+                                           placeholder="输入">
+                                </div>
+                                <div class="form-group">
+                                    <label>作者</label>
+                                    <input type="text" class="form-control" id="bookAuthor" name="bookAuthor"
+                                           placeholder="输入">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">库存</label>
+                                    <input type="text" class="form-control" id="stock" name="stock">
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">价格</label>
+                                    <input type="text" class="form-control" id="price" name="price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">精彩章节</label>
+                                    <input type="text" class="form-control" id="betterPart" name="betterPart">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="detail">长篇描述</label>
+                                <textarea  class="form-control" rows="4" id="detail" name="detail"
+                                          placeholder="输入"></textarea>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <label for="detail">目录</label>
+                                <textarea  class="form-control" rows="4" id="index" name="index"
+                                           placeholder="输入"></textarea>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <select class=" form-control select2" multiple="multiple" data-placeholder="选择一种类型"
+                                        style="width: 100%;" id ="tag" name="tag">
+                                    <option>天文</option>
+                                    <option>地理</option>
+                                    <option>奇观</option>
+                                    <option>小说</option>
+                                    <option>统计</option>
+                                    <option>国外</option>
+                                    <option>计算机相关</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+
+                        </form>
+                </div><!-- /.box -->
+            </div>
+            <div class="modal-footer">
+                <div class="col-xs-12">
+                    <button type="button" id = "good-submit" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-align-right"></i> 提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        table.dataTable tbody tr.selected {
+            background-color: #B0BED9;
+        }
+    </style>
+</div>

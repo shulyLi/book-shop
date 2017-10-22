@@ -46,24 +46,30 @@ define([
             $("#book-body").empty();
         },
         clickQuery: function () {
-            alert(1);
             this.initBody();
             this.queryBook();
         },
         queryBook: function () {
+            var tagStr = $("#query-book-tags").select2('val');
+            if (tagStr === null) {
+                tagStr = "";
+            } else {
+                tagStr = tagStr.toString();
+            }
             var param = {
                 page : this.pageNum,
                 name : $("#query-data").val(),
-                tags : $("#query-book-tags").select2('val')
+                tags : tagStr
+
             };
             ShulyTool.run("/console/good/index/summary", "GET", false, param, function (data) {
-/*                $.each(data, function (idx, value) {
+                $.each(data, function (idx, value) {
                     if(this.num %4 === 0){
                         this.addRow();
                     }
                     this.append(value);
                     this.num++;
-                });*/
+                });
                 this.pageNum++;
             }, null);
         },

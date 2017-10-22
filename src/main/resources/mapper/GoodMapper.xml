@@ -108,9 +108,8 @@
 
     <select id="selectIndex" parameterType="map" resultMap="GoodSummary">
         <include refid="sqlSummary"/>
-        WHERE id &lt; #{flag}
         ORDER by sell_cnt desc
-        limit #{size}
+        limit #{l}, #{r}
     </select>
 
     <select id="selectList" parameterType="map" resultMap="GoodSummary">

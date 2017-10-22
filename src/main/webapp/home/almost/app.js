@@ -7,7 +7,8 @@ define([
     'select2',
     'bootstrap',
     'ALT',
-
+    'datatables',
+    'datatablesboot',
     'router',
     'md5',
 ], function ($, _, Backbone) {
