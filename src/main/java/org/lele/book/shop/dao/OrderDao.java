@@ -20,7 +20,8 @@ public interface OrderDao {
 
     List<BookOrder> selectList(@Param("userId") Integer userId,
                                @Param("bookId") Integer bookId,
-                               @Param("size") int size, @Param("flag") int flag);
+                               @Param("size") int size,
+                               @Param("flag") long flag);
     
     BookOrder select(@Param("orderNo") long orderNo);
     BookOrderHistory selectHistory(@Param("orderNo") long orderNo);

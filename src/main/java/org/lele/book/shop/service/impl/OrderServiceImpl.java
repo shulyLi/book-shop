@@ -70,10 +70,10 @@ public class OrderServiceImpl implements OrderService {
         BookUser user = userService.getUser(userId);
         // admin　都可以看到
         if (user.userType == UserType.Admin || user.userType == UserType.Master) {
-            return orderDao.selectList(null, null, Integer.MAX_VALUE, Integer.MAX_VALUE);
+            return orderDao.selectList(null, null, Integer.MAX_VALUE, Long.MAX_VALUE);
         } else {
             // 只能看自己的
-            return orderDao.selectList(userId, null, Integer.MAX_VALUE, Integer.MAX_VALUE);
+            return orderDao.selectList(userId, null, Integer.MAX_VALUE, Long.MAX_VALUE);
         }
     }
 }

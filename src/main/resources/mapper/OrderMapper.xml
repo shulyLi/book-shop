@@ -30,6 +30,7 @@
 
     <sql id="sqlMain">
         select `order_no`, `user_id`, `book_id`, `state`, `pay_type`, `pay_fee`, `detail`, `create_time`
+              ,`book_id`,`address_head`, `address_tail`, `receive_name`, `receive_phone`
 
         from `book_order`
     </sql>
