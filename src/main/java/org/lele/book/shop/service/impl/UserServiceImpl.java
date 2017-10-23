@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer ssoUserId(String ssoCode) {
-        return cache.getIfPresent(ssoCode);
+        return (cache).getIfPresent(ssoCode);
     }
 
     @Override

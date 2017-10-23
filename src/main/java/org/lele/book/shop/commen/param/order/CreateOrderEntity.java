@@ -68,7 +68,6 @@ public class CreateOrderEntity implements ControllerParam {
         if (province!= null) sb.append(province).append(",");
         if (city != null) sb.append(city).append(",");
         if (county != null) sb.append(county).append(";");
-        sb.append(detailAddress);
         return sb.toString();
     }
 }

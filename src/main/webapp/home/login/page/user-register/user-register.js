@@ -46,10 +46,9 @@ define([
                 'userName' : name
             };
             ShulyTool.run('/console/user/register', 'POST', true, param, function(data) {
-                cookie("user-sso", data, {
+                cookie("user-sso", data.data, {
                     path:"/"
                 });
-                console.log(cookie("user-sso"));
                 window.location.href = "/"
             }, null);
         },

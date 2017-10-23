@@ -30,7 +30,7 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity create(CreateOrderEntity entity, HttpServletRequest request) {
-        String sso = CookieUtil.get(request, "sso");
+        String sso = CookieUtil.get(request, "user-sso");
         entity.checkAndFull();
         logger.info("create order [{}->goodId:num[{}:{}]", sso, entity.bookId, entity.cnt);
         orderService.createOrder(sso, entity.bookId, entity.cnt, entity.buyName, entity.buyPhone, entity.createAddress(), entity.detailAddress);

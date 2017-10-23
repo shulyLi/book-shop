@@ -29,10 +29,9 @@ define([
                 'password': pswd
             };
             ShulyTool.run('/console/user/login', 'GET', true, param, function (data) {
-                cookie("user-sso", data, {
+                cookie("user-sso", data.data, {
                     path:"/"
                 });
-                console.log(cookie("user-sso"));
                 window.location.href = "/"
             }, null);
         },

@@ -1,5 +1,6 @@
 package org.lele.book.shop.controller;
 
+import com.google.common.collect.Maps;
 import org.lele.book.shop.commen.param.user.UserLoginEntity;
 import org.lele.book.shop.commen.param.user.UserRegisterEntity;
 import org.lele.book.shop.service.UserService;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * author  shuly
@@ -30,32 +32,36 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity register(UserRegisterEntity entity) {
         entity.checkAndFull();
         logger.info("user [{}->{}] register", entity.email, entity.userName);
-
         String sso = userService.userRegister(entity.password, entity.email, entity.userName);
-        return ResponseEntity.ok(sso);
+        Map<String, Object > ans = Maps.newHashMap();
+        ans.put("data", sso);
+        return ResponseEntity.ok(ans);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity login(UserLoginEntity entity,  HttpServletRequest httpRequest, HttpServletResponse response){
+    public ResponseEntity login(UserLoginEntity entity, HttpServletRequest httpRequest, HttpServletResponse response) {
         entity.checkAndFull();
-        logger.info("user [{}] login", entity.email);
         String sso = userService.userLogin(entity.password, entity.email);
-        return ResponseEntity.ok(sso);
+        logger.info("user [{}->{}] login", entity.email, sso);
+        Map<String, Object > ans = Maps.newHashMap();
+        ans.put("data", sso);
+        return ResponseEntity.ok(ans);
     }
 
     // 下面的 先不 維護
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity update(){
+    public ResponseEntity update() {
         return ResponseEntity.noContent().build();
     }
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity list(){
+    public ResponseEntity list() {
         return ResponseEntity.noContent().build();
     }
 }

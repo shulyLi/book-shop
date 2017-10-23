@@ -20,6 +20,10 @@ define([],function () {
             },
             error:function(xhr,textStatus){
                 console.log(xhr);
+                if (xhr.responseJSON.err === "NoSuchUser") {
+                    window.location.href = "/view/login.html";
+                    return
+                }
                 alert("错误代码:" + xhr.status + "\n具体错误:" + xhr.responseJSON.err+ "\n具体信息:" + xhr.responseJSON.msg);
             },
             complete:function() {
