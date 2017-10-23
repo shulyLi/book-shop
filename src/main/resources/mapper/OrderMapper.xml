@@ -7,6 +7,7 @@
         <result column="order_no" property="orderNo"/>
         <result column="user_id" property="userId"/>
         <result column="book_id" property="bookId"/>
+        <result column="cnt" property="cnt"/>
         <result column="state" property="state" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="pay_type" property="payType" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="pay_fee" property="payFee"/>
@@ -30,7 +31,7 @@
 
     <sql id="sqlMain">
         select `order_no`, `user_id`, `book_id`, `state`, `pay_type`, `pay_fee`, `detail`, `create_time`
-              ,`book_id`,`address_head`, `address_tail`, `receive_name`, `receive_phone`
+              ,`book_id`,`address_head`, `address_tail`, `receive_name`, `receive_phone`, `cnt`
 
         from `book_order`
     </sql>
@@ -42,13 +43,13 @@
 
     <insert id="insert" parameterType="org.lele.book.shop.domain.BookOrder">
         INSERT INTO book_order(`order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `detail`
-          ,`book_id`,`address_head`, `address_tail`, `receive_name`, `receive_phone`
+          ,`book_id`,`address_head`, `address_tail`, `receive_name`, `receive_phone`, `cnt`
         )
         VALUES (#{orderNo}, #{userId},
           #{state, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
           #{payType, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
           #{payFee}, #{detail},
-          #{bookId}, #{addressHead}, #{addressTail}, #{receiveName}, #{receivePhone}
+          #{bookId}, #{addressHead}, #{addressTail}, #{receiveName}, #{receivePhone}, #{cnt}
         )
     </insert>
 

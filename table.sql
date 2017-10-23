@@ -135,3 +135,40 @@ CREATE TABLE IF NOT EXISTS `book_comment` (
   KEY idx_user(`user_id`)
 )
   COMMENT '评价';
+
+
+drop table book_order ;
+CREATE TABLE IF NOT EXISTS `book_order` (
+  `id`            INT(11)     NOT NULL AUTO_INCREMENT,
+  `user_id`       INT(11)     NOT NULL
+  COMMENT '用户Id',
+  `order_no`      BIGINT      NOT NULL
+  COMMENT '订单号',
+  `book_id`       INT(11)     NOT NULL
+  COMMENT '书ID',
+  `cnt`           int(11)     NOT NULL COMMENT '数量',
+  `state`         TINYINT(2)  NOT NULL
+  COMMENT '订单状态',
+  `pay_type`      TINYINT(2)  NOT NULL
+  COMMENT '支付类型',
+  `pay_fee`       INT(11)     NOT NULL
+  COMMENT '支付的钱,分单位',
+
+  `receive_phone` VARCHAR(13) NOT NULL
+  COMMENT '手机号',
+  `receive_name`  VARCHAR(13) NOT NULL
+  COMMENT '收件人姓名',
+
+  `address_head`  VARCHAR(50) NOT NULL
+  COMMENT '用户地址',
+  `address_tail`  VARCHAR(50) NOT NULL
+  COMMENT '用户地址',
+
+  `detail`        TEXT        NOT NULL
+  COMMENT '购买东西的json详情非常详细的信息',
+  `create_time`   DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE u_idx_order_no(`order_no`),
+  KEY idx_user_id(`user_id`)
+)
+  COMMENT '订单';

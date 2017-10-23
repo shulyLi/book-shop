@@ -72,7 +72,7 @@ define([
                 'buyPhone': $("#buyPhone").val()
             };
             ShulyTool.run("/console/order", "POST", false, param, function (data) {
-
+                window.location.href = "#book-order-manager"
             }, null);
         },
         bookTableStr: function (good) {

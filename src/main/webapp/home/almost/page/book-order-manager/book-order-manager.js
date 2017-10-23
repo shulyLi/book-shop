@@ -31,7 +31,7 @@ define([
                     {"data": "bookName"},
                     {"data": "bookAuthor"},
                     {"data": "cnt"},
-                    {"data": "price"},
+                    {"data": "payFee"},
                     {"data": "state"}
                 ]
             });

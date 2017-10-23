@@ -1,5 +1,6 @@
 package org.lele.book.shop.controller;
 
+import com.google.common.collect.Maps;
 import org.lele.book.shop.commen.CookieUtil;
 import org.lele.book.shop.commen.param.order.CreateOrderEntity;
 import org.lele.book.shop.service.OrderService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * author  shuly
@@ -51,8 +53,9 @@ public class OrderController {
     public ResponseEntity listOrder(HttpServletRequest request){
         String sso = CookieUtil.get(request, "user-sso");
         logger.info("list order [{}]", sso);
-
-        return ResponseEntity.ok(orderService.listOrder(sso));
+        Map<String, Object> ans = Maps.newHashMap();
+        ans.put("data", orderService.listOrder(sso));
+        return ResponseEntity.ok(ans);
     }
 
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)

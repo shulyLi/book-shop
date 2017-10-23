@@ -42,8 +42,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createOrder(String sso, int bookId, int cnt, String buyName, String buyPhone, String add1, String add2) {
         Integer userId = userService.ssoUserId(sso);
-
         Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
+        BookUser user = userService.getUser(userId);
         BookOrder order = new BookOrder();
         BookGood good = goodService.queryBook(bookId);
         Assert.assertion(good != null, Errors.NoSuchBook, "没有这个货物");
@@ -52,18 +52,19 @@ public class OrderServiceImpl implements OrderService {
         order.orderNo = OrderUtils.allocateOrderNo(System.currentTimeMillis(), serverId);
         order.bookId = bookId;
         order.state = State.Submit;
+        order.cnt = cnt;
         order.payFee = good.price * cnt + 20;
         order.payType = PayType.Arrive_PAY;
         order.receiveName = buyName;
         order.receivePhone = buyPhone;
         order.addressHead = add1;
         order.addressTail = add2;
-        order.detail = "";
+        order.makeDetail(user, good);
         orderDao.insert(order);
     }
 
     @Override
-    public List listOrder(String sso) {
+    public List<BookOrder> listOrder(String sso) {
         Integer userId = userService.ssoUserId(sso);
         Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
 
