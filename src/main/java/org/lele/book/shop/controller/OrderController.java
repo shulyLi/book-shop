@@ -1,13 +1,16 @@
 package org.lele.book.shop.controller;
 
+import org.lele.book.shop.commen.CookieUtil;
+import org.lele.book.shop.commen.param.order.CreateOrderEntity;
+import org.lele.book.shop.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * author  shuly
@@ -22,8 +25,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class OrderController {
     private Logger logger = LoggerFactory.getLogger(OrderController.class);
 
+    @Resource
+    private OrderService orderService;
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(){
+    public ResponseEntity create(CreateOrderEntity entity, HttpServletRequest request) {
+        String sso = CookieUtil.get(request, "sso");
+        entity.checkAndFull();
+        logger.info("create order [{}->goodId:num[{}:{}]", sso, entity.bookId, entity.cnt);
+        orderService.createOrder(sso, entity.bookId, entity.cnt, entity.buyName, entity.buyPhone, entity.createAddress(), entity.detailAddress);
         return ResponseEntity.noContent().build();
     }
 

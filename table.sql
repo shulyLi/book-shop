@@ -1,24 +1,31 @@
 CREATE TABLE IF NOT EXISTS `book_order` (
-  `id`          INT(11)     NOT NULL AUTO_INCREMENT,
-  `user_id`     INT(11)     NOT NULL
+  `id`            INT(11)     NOT NULL AUTO_INCREMENT,
+  `user_id`       INT(11)     NOT NULL
   COMMENT '用户Id',
-  `order_no`    BIGINT      NOT NULL
+  `order_no`      BIGINT      NOT NULL
   COMMENT '订单号',
-  `book_id`     INT(11)     NOT NULL
+  `book_id`       INT(11)     NOT NULL
   COMMENT '书ID',
-  `state`       TINYINT(2)  NOT NULL
+  `state`         TINYINT(2)  NOT NULL
   COMMENT '订单状态',
-  `pay_type`    TINYINT(2)  NOT NULL
+  `pay_type`      TINYINT(2)  NOT NULL
   COMMENT '支付类型',
-  `pay_fee`     INT(11)     NOT NULL
+  `pay_fee`       INT(11)     NOT NULL
   COMMENT '支付的钱,分单位',
-  `phone`       VARCHAR(13) NOT NULL
+
+  `receive_phone` VARCHAR(13) NOT NULL
   COMMENT '手机号',
-  `address`     VARCHAR(50) NOT NULL
+  `receive_name`  VARCHAR(13) NOT NULL
+  COMMENT '收件人姓名',
+
+  `address_head`  VARCHAR(50) NOT NULL
   COMMENT '用户地址',
-  `detail`      TEXT        NOT NULL
+  `address_tail`  VARCHAR(50) NOT NULL
+  COMMENT '用户地址',
+
+  `detail`        TEXT        NOT NULL
   COMMENT '购买东西的json详情非常详细的信息',
-  `create_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time`   DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE u_idx_order_no(`order_no`),
   KEY idx_user_id(`user_id`)
@@ -88,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `book_good` (
   COMMENT '拉黑(系统or我们删除)',
   `stock`       INT(11)      NOT NULL
   COMMENT '库存',
-  `better_part`  VARCHAR(256) NOT NULL
+  `better_part` VARCHAR(256) NOT NULL
   COMMENT '精彩章节',
   `index`       TEXT         NOT NULL
   COMMENT '目录',
@@ -119,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `book_comment` (
   COMMENT '逻辑删除（用户删除）',
   `is_black`    TINYINT(1)    NOT NULL
   COMMENT '拉黑，防止和谐词汇',
-  `reply_time` DATETIME
+  `reply_time`  DATETIME
   COMMENT '回复时间',
   `create_time` DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

@@ -18,8 +18,9 @@ public interface OrderDao {
     int insertHistory(BookOrderHistory history);
     int updateOrder(@Param("orderNo") long orderNo, @Param("state") int state);
 
-    List<BookOrder> selectByUserId(@Param("userId") int userId, @Param("size") int size, @Param("flag") int flag);
-    List<BookOrder> selectByBookId(@Param("bookId") int bookId, @Param("size") int size, @Param("flag") int flag);
+    List<BookOrder> selectList(@Param("userId") Integer userId,
+                               @Param("bookId") int bookId,
+                               @Param("size") int size, @Param("flag") int flag);
     
     BookOrder select(@Param("orderNo") long orderNo);
     BookOrderHistory selectHistory(@Param("orderNo") long orderNo);

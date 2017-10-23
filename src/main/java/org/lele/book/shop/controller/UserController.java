@@ -35,7 +35,7 @@ public class UserController {
         entity.checkAndFull();
         logger.info("user [{}->{}] register", entity.email, entity.userName);
 
-        Long sso = userService.userRegister(entity.password, entity.email, entity.userName);
+        String sso = userService.userRegister(entity.password, entity.email, entity.userName);
         return ResponseEntity.ok(sso);
     }
 
@@ -43,7 +43,7 @@ public class UserController {
     public ResponseEntity login(UserLoginEntity entity,  HttpServletRequest httpRequest, HttpServletResponse response){
         entity.checkAndFull();
         logger.info("user [{}] login", entity.email);
-        Long sso = userService.userLogin(entity.password, entity.email);
+        String sso = userService.userLogin(entity.password, entity.email);
         return ResponseEntity.ok(sso);
     }
 

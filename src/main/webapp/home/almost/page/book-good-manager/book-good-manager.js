@@ -88,7 +88,7 @@ define([
             var param = {
                 bookName : $("#bookName").val(),
                 bookAuthor:  $("#bookAuthor").val(),
-                bookHead: $("#bookHead")[0].src,
+                bookHead: $("#bookHead").attr("src"),
                 price:  $("#price").val(),
                 simpleDesc:  $("#simpleDesc").val(),
                 tag:tagStr,

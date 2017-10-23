@@ -14,7 +14,7 @@ public interface UserService {
      * @param email    郵箱
      * @return 加密的獨特 密匙
      */
-    Long userRegister(String password, String email, String userName);
+    String userRegister(String password, String email, String userName);
 
 
     /**
@@ -22,9 +22,9 @@ public interface UserService {
      * @param email    郵箱
      * @return 加密的獨特 密匙
      */
-    Long userLogin(String password, String email);
+    String userLogin(String password, String email);
 
-    Integer ssoUserId(Long ssoCode);
+    Integer ssoUserId(String ssoCode);
 
     BookUser getUser(Integer userId);
 }

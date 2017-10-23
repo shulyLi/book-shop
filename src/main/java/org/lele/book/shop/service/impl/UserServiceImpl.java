@@ -27,11 +27,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     // 本來這個 最好 放進 redis 的 調價有限  保存五分鐘，操作會刷新時間
-    private Cache<Long, Integer> cache = CacheBuilder.newBuilder()
+    private Cache<String, Integer> cache = CacheBuilder.newBuilder()
             .expireAfterAccess(5, TimeUnit.MINUTES).build();
 
     @Override
-    public Long userRegister(String password, String email, String userName) {
+    public String userRegister(String password, String email, String userName) {
         BookUser user = new BookUser();
         user.passWord = password;
         user.email    = email;
@@ -42,25 +42,25 @@ public class UserServiceImpl implements UserService {
         } catch (DuplicateKeyException e) {
             throw new BookShopSystemException(Errors.MailHasUsed, "郵箱已經占用");
         }
-        Long sso = Sso.ssoCode();
+        String sso = Sso.ssoCode();
         cache.put(sso, user.id);
         return sso;
     }
 
     @Override
-    public Long userLogin(String password, String email) {
+    public String userLogin(String password, String email) {
         Map<String, Object> param = Maps.newHashMap();
         param.put("passWord", password);
         param.put("email", email);
         BookUser user = userDao.select(param);
         Assert.assertion(user != null, Errors.NoSuchUser, "密碼或者賬戶不對");
-        Long sso = Sso.ssoCode();
+        String sso = Sso.ssoCode();
         cache.put(sso, user.id);
         return sso;
     }
 
     @Override
-    public Integer ssoUserId(Long ssoCode) {
+    public Integer ssoUserId(String ssoCode) {
         return cache.getIfPresent(ssoCode);
     }
 

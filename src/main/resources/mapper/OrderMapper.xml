@@ -9,8 +9,10 @@
         <result column="state" property="state" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="pay_type" property="payType" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
         <result column="pay_fee" property="payFee"/>
-        <result column="phone" property="phone"/>
-        <result column="address" property="address"/>
+        <result column="receive_phone" property="receivePhone"/>
+        <result column="receive_name" property="receiveName"/>
+        <result column="address_head" property="addressHead"/>
+        <result column="address_tail" property="addressTail"/>
         <result column="detail" property="detail"/>
         <result column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
     </resultMap>
@@ -26,7 +28,8 @@
     </resultMap>
 
     <sql id="sqlMain">
-        select `order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `phone`, `address`, `detail`, `create_time`
+        select `order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `detail`, `create_time`
+
         from `book_order`
     </sql>
 
@@ -36,11 +39,13 @@
     </sql>
 
     <insert id="insert" parameterType="org.lele.book.shop.domain.BookOrder">
-        INSERT INTO book_order(`order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `phone`, `address`, `detail`)
+        INSERT INTO book_order(`order_no`, `user_id`, `state`, `pay_type`, `pay_fee`, `detail`
+          ,`address_head`, `address_tail`, `receive_name`, `receive_phone`
+        )
         VALUES (#{orderNo}, #{userId},
           #{state, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
           #{payType, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
-          #{payFee}, #{phone}, #{address}, #{detail}
+                    #{addressHead}, #{addressTail}, #{receiveName}, #{receivePhone}
         )
     </insert>
 
@@ -59,20 +64,22 @@
         WHERE order_no = #{orderNo}
     </update>
 
-    <select id="selectByUserId" parameterType="map" resultMap="Order">
+    <select id="selectList" parameterType="map" resultMap="Order">
         <include refid="sqlMain" />
-        WHERE user_id = #{userId} and order_no &lt; #{flag}
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="bookId !=null">
+                and book_id = #{bookId}
+            </if>
+            <if test="1 == 1" >
+                and order_no &lt; #{flag}
+            </if>
+        </where>
         ORDER BY order_no desc
         limit #{size}
     </select>
-
-    <select id="selectByBookId" parameterType="map" resultMap="Order">
-        <include refid="sqlMain" />
-        WHERE book_id = #{bookId} and order_no &lt; #{flag}
-        ORDER BY order_no desc
-        limit #{size}
-    </select>
-
     <select id="select" parameterType="map" resultMap="Order">
         <include refid="sqlMain" />
         WHERE order_no = #{orderNo}

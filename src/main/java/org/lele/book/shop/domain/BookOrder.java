@@ -19,8 +19,10 @@ public class BookOrder extends StringView {
     public State    state;
     public PayType  payType;
     public int      payFee;
-    public String   phone;
-    public String   address;
+    public String   receiveName;
+    public String   receivePhone;
+    public String   addressHead;
+    public String   addressTail;
     public String   detail;
     public LocalDateTime createTime;
 }

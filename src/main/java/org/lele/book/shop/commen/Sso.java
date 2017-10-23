@@ -8,14 +8,14 @@ import java.util.Random;
  */
 public class Sso {
     private static Random random = new Random();
-    public static Long ssoCode(){
+    public static String ssoCode(){
         long timeMillis = System.currentTimeMillis();
         long start = random.nextInt() & (0xf);
         start <<= 55;
         start += (timeMillis << 4);
         start += timeMillis;
         start += random.nextInt() & (0xf);
-        return start;
+        return String.valueOf(start);
     }
 
     public static void main(String[] args) {

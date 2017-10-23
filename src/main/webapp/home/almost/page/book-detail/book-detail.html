@@ -14,12 +14,6 @@
                 <!-- Box Comment -->
                 <div class="box box-widget">
                     <div class='box-header with-border'>
-                        <div id='goodOwner' class='user-block'>
-                            <img class='img-circle' src='/upload/head/default_head.jpg' alt='user image'>
-                            <span class='username'><a href="#">"    "</a></span>
-                            <span class='description'>商品主</span>
-                        </div><!-- /.user-block -->
-
                         <div class='box-tools'>
                             <button class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-minus'></i></button>
                         </div><!-- /.box-tools -->
@@ -38,102 +32,172 @@
                                 <h3 id="bookName" class="profile-username text-center">小人书</h3>
                                 <p id="tag" class="text-muted text-center">亲近自然</p>
                                 <ul class="list-group list-group-unbordered">
+                                    <input  type="hidden" class="form-control" id="book-id" name="id"
+                                            placeholder="输入">
                                     <li id="bookAuthor" class="list-group-item">
-                                        <b>作者</b> <a class="pull-right">1</a>
+                                        <b>作者</b> <a class="pull-right">-1</a>
                                     </li>
 
                                     <li id="sellCnt" class="list-group-item">
-                                        <b>销量</b> <a class="pull-right"></a>
+                                        <b>销量</b> <a class="pull-right">-1</a>
                                     </li>
                                     <li id="stock" class="list-group-item">
-                                        <b>库存</b> <a class="pull-right"></a>
+                                        <b>库存</b> <a class="pull-right">-1</a>
                                     </li>
                                     <li id="price" class="list-group-item">
-                                        <b>价钱(分)</b> <a class="pull-right">1</a>
+                                        <b>价钱(分)</b> <a class="pull-right">-1</a>
                                     </li>
+
+                                    <li id="betterPart" class="list-group-item">
+                                        <b>精彩章节</b> <a class="pull-right">-1</a>
+                                    </li>
+
+
                                     <li class="list-group-item col-sm-12">
-                                        <div class="col-sm-5">
-                                            <a class="btn btn-block btn-social btn-success">
-                                                <i class="fa  fa-heart"></i> 添加到
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-5 col-sm-offset-1">
-                                            <a id="dealButten" class="btn btn-block btn-social btn-danger "
-                                               data-toggle="modal" data-target="#dealModle">
-                                                <i class="fa fa-shopping-cart"></i> 填写订单
-                                            </a>
-                                        </div>
+                                        <a id="dealButten" class="btn btn-block btn-social btn-danger " data-toggle="modal" data-target="#dealModle">
+                                            <i class="fa fa-shopping-cart"></i> 填写订单</a>
                                     </li>
                                 </ul>
                             </div><!-- /.box-body -->
                         </div>
                         <!-- Social sharing buttons -->
                         <!-- Post -->
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="/LTE/dist/img/user7-128x128.jpg"
-                                     alt="User Image">
-                                <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                                <span class="description">Sent you a message - 3 days ago</span>
-                            </div>
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore the hate as they create awesome
-                                tools to help create filler text for everyone from bacon lovers
-                                to Charlie Sheen fans.
-                            </p>
-
-                            <form class="form-horizontal">
-                                <div class="form-group margin-bottom-none">
-                                    <div class="col-sm-9">
-                                        <input class="form-control input-sm" placeholder="Response">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="/LTE/dist/img/user1-128x128.jpg"
-                                     alt="user image">
-                                <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                                <span class="description">Shared publicly - 7:30 PM today</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore the hate as they create awesome
-                                tools to help create filler text for everyone from bacon lovers
-                                to Charlie Sheen fans.
-                            </p>
-                            <ul class="list-inline">
-                                <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a>
-                                </li>
-                                <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>
-                                    Like</a>
-                                </li>
-                                <li class="pull-right">
-                                    <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
-                                        Comments
-                                        (5)</a></li>
-                            </ul>
-
-                            <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                        </div>
                     </div><!-- /.box-body -->
+
+                    <div class="box-body">
+
+                    </div>
                 </div><!-- /.col -->
-            </div><!-- /.row -->
+            </div>
+        </div><!-- /.row -->
     </section><!-- /.content -->
 </div>
+
+<div class="modal fade " id="dealModle" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- title row -->
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <h2 class="page-header">
+                            <i class="fa fa-globe"></i> 书城, Inc.电子协议
+                            <small class="pull-right"></small>
+                        </h2>
+                    </div><!-- /.col -->
+
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                    <form  role="form">
+                        <div class="box-body">
+                            <div class="form-group col-sm-3" >
+                                <label>您的地址</label>
+                                <select class="form-control" disabled="disabled" style="width: 100%;">
+                                    <option selected="selected">中国</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3" >
+                                <label>省份</label>
+                                <select class="form-control select2" id ="s_province" name="s_province" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>地级市</label>
+                                <select class="form-control select2" id="s_city" name='s_city' style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3" >
+                                <label>市、县级市</label>
+                                <select class="form-control select2" id="s_county" name="s_county" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="add" >您的姓名</label>
+                                <input type="text" class="form-control" id="buyName" name = 'buyName' placeholder="输入">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="add" >您的联系电话</label>
+                                <input type="text" class="form-control"
+                                       onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                                       id="buyPhone" name = 'buyPhone' placeholder="输入">
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="add" >具体地址</label>
+                                <input type="text" class="form-control" id="add" name = 'add' placeholder="输入">
+                            </div>
+                        </div><!-- /.box-body -->
+                    </form>
+
+                </div><!-- /.row -->
+                <!-- Table row -->
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="box box-widget ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">商品信息</h3>
+                                <div class="box-tools pull-right">
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body col-md-12">
+                                <table id ="goodTable" class="table text-center">
+                                    <thead >
+                                    <tr>
+                                        <th class="col-sm-2">书名</th>
+                                        <th class="col-sm-1">图片</th>
+                                        <th class="col-sm-5">作者</th>
+                                        <th class="col-sm-2">单价</th>
+                                        <th class="col-sm-2">数量</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-xs-6">
+                        <p class="lead">对于支付方式</p>
+                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                           人认为我，我为人人，我们只支持到付，希望大家合作愉快;为了更多的服务大家，并不会提供三方支付平台，请小心上当受骗。
+                        </p>
+                    </div><!-- /.col -->
+                    <div class="col-xs-6">
+                        <p class="lead">价格详情</p>
+                        <div class="table-responsive">
+                            <table id = "dealPriceTable" class="table">
+                                <tbody>
+                                    <tr><th style="width:50%">运费(固定):</th><td>￥0.00</td></tr>
+                                    <tr><th style="width:50%">总价(到付):</th><td>￥0.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <!-- this row will not appear when printing -->
+                <div class="row no-print">
+                    <div class="col-xs-12">
+                        <button id ='deal-submit' class="btn btn-danger pull-right"><i class="fa fa-credit-card"></i> 提交 </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
