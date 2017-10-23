@@ -19,7 +19,7 @@ public interface OrderDao {
     int updateOrder(@Param("orderNo") long orderNo, @Param("state") int state);
 
     List<BookOrder> selectList(@Param("userId") Integer userId,
-                               @Param("bookId") int bookId,
+                               @Param("bookId") Integer bookId,
                                @Param("size") int size, @Param("flag") int flag);
     
     BookOrder select(@Param("orderNo") long orderNo);

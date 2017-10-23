@@ -48,18 +48,15 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity listOrder(){
-        return ResponseEntity.noContent().build();
+    public ResponseEntity listOrder(HttpServletRequest request){
+        String sso = CookieUtil.get(request, "user-sso");
+        logger.info("list order [{}]", sso);
+
+        return ResponseEntity.ok(orderService.listOrder(sso));
     }
 
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
     public ResponseEntity listBookOrder(@PathVariable("bookId") String bookId){
         return ResponseEntity.noContent().build();
     }
-
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public ResponseEntity listUserOrder(@PathVariable("userId") String userId){
-        return ResponseEntity.noContent().build();
-    }
-
 }
