@@ -35,6 +35,7 @@ define([],function () {
         })
     };
     return{
-        run:run
+        run:run,
+        sleep:sleep
     }
 });

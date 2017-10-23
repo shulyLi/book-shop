@@ -72,6 +72,8 @@ define([
                 'buyPhone': $("#buyPhone").val()
             };
             ShulyTool.run("/console/order", "POST", false, param, function (data) {
+                $("#dealModle").modal("hide");
+                ShulyTool.sleep(300);
                 window.location.href = "#book-order-manager"
             }, null);
         },
