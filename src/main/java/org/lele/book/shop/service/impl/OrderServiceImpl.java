@@ -9,6 +9,7 @@ import org.lele.book.shop.domain.BookUser;
 import org.lele.book.shop.domain.help.PayType;
 import org.lele.book.shop.domain.help.State;
 import org.lele.book.shop.domain.help.UserType;
+import org.lele.book.shop.exception.BookShopSystemException;
 import org.lele.book.shop.exception.Errors;
 import org.lele.book.shop.service.GoodService;
 import org.lele.book.shop.service.OrderService;
@@ -76,5 +77,18 @@ public class OrderServiceImpl implements OrderService {
             // 只能看自己的
             return orderDao.selectList(userId, null, Integer.MAX_VALUE, Long.MAX_VALUE);
         }
+    }
+
+    @Override
+    public BookOrder getOrder(Long orderNo, String sso) {
+        Integer userId = userService.ssoUserId(sso);
+        Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
+        BookUser user = userService.getUser(userId);
+        BookOrder order = orderDao.select(orderNo);
+        Assert.assertion(order != null, Errors.NoSuchOrder, "么有这个订单");
+        if (order.userId != userId && user.userType != UserType.Admin && user.userType != UserType.Master) {
+            throw new BookShopSystemException(Errors.MethodNotAllowed, "你没有权限");
+        }
+        return order;
     }
 }

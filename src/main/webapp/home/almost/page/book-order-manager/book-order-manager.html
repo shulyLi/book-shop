@@ -26,6 +26,7 @@
                                 <th data-field="cnt">数量</th>
                                 <th data-field="payFee">钱</th>
                                 <th data-field="state">状态</th>
+                                <th data-field="createTime">时间</th>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -39,7 +40,7 @@
     </section>
 </div>
 
-<div class="modal fade " id="dealModle" tabindex="-1" role="dialog"
+<div class="modal fade " id="order-modal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content ">
@@ -51,14 +52,12 @@
             <div class="modal-body">
                 <!-- title row -->
                 <div class="row">
-
                     <div class="col-xs-12">
                         <h2 class="page-header">
                             <i class="fa fa-globe"></i> 书城, Inc.电子协议
                             <small class="pull-right"></small>
                         </h2>
                     </div><!-- /.col -->
-
                 </div>
                 <!-- info row -->
                 <div class="row invoice-info">
@@ -66,39 +65,31 @@
                         <div class="box-body">
                             <div class="form-group col-sm-3" >
                                 <label>您的地址</label>
-                                <select class="form-control" disabled="disabled" style="width: 100%;">
-                                    <option selected="selected">中国</option>
-                                </select>
+                                <input type="text" class="form-control" disabled="disabled" style="width: 100%;">
                             </div>
                             <div class="form-group col-sm-3" >
                                 <label>省份</label>
-                                <select class="form-control select2" id ="s_province" name="s_province" style="width: 100%;">
-                                </select>
+                                <input type="text" class="form-control" disabled="disabled" id ="s_province" name="s_province" style="width: 100%;">
                             </div>
                             <div class="form-group col-sm-3">
                                 <label>地级市</label>
-                                <select class="form-control select2" id="s_city" name='s_city' style="width: 100%;">
-                                </select>
+                                <input type="text" class="form-control" disabled="disabled" id="s_city" name='s_city' style="width: 100%;">
                             </div>
                             <div class="form-group col-sm-3" >
                                 <label>市、县级市</label>
-                                <select class="form-control select2" id="s_county" name="s_county" style="width: 100%;">
-                                </select>
+                                <input type="text" class="form-control" disabled="disabled" id="s_county" name="s_county" style="width: 100%;">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="add" >您的姓名</label>
-                                <input type="text" class="form-control" id="buyName" name = 'buyName' placeholder="输入">
+                                <label for="buyName" >您的姓名</label>
+                                <input type="text" disabled="disabled" class="form-control" id="buyName" name = 'buyName' placeholder="输入">
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="add" >您的联系电话</label>
-                                <input type="text" class="form-control"
-                                       onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
-                                       id="buyPhone" name = 'buyPhone' placeholder="输入">
+                                <input type="text" disabled="disabled" class="form-control" id="buyPhone" name="buyPhone">
                             </div>
                             <div class="form-group col-sm-12">
                                 <label for="add" >具体地址</label>
-                                <input type="text" class="form-control" id="add" name = 'add' placeholder="输入">
+                                <input type="text" disabled="disabled" class="form-control" id="add" name = 'add' placeholder="输入">
                             </div>
                         </div><!-- /.box-body -->
                     </form>
@@ -165,5 +156,10 @@
             </div>
         </div>
     </div>
+    <style type="text/css">
+        table.dataTable tbody tr.selected {
+            background-color: #B0BED9;
+        }
+    </style>
 </div>
 

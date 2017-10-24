@@ -27,18 +27,19 @@ public class BookOrderJsonSerializer extends JsonSerializer<BookOrder> {
         json.writeStringField("state", bookOrder.state.toString());
 
         json.writeStringField("payType", bookOrder.payType.toString());
-        json.writeNumberField("payFee", bookOrder.payFee / 100.);
+        json.writeStringField("payFee", String.format("%.2f元",bookOrder.payFee / 100.));
         json.writeNumberField("cnt", bookOrder.cnt);
         json.writeNumberField("bookId", bookOrder.bookId);
         json.writeNumberField("userId", bookOrder.userId);
+
         Map map = JSON.safeRead(bookOrder.detail, Map.class);
 
         if (map != null) {
             json.writeStringField("bookName", map.getOrDefault("bookName", "").toString());
             json.writeStringField("bookHead", map.getOrDefault("bookHead", "").toString());
             json.writeStringField("bookAuthor", map.getOrDefault("bookAuthor", "").toString());
+            json.writeStringField("bookPrice", map.getOrDefault("price", "").toString());
         }
-
 
         json.writeStringField("createTime", LocalDateTimeUtil.transBasicString(bookOrder.createTime));
         json.writeEndObject();
