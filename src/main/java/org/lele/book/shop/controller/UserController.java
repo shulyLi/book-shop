@@ -1,8 +1,11 @@
 package org.lele.book.shop.controller;
 
 import com.google.common.collect.Maps;
+import org.lele.book.shop.commen.CookieUtil;
+import org.lele.book.shop.commen.Sso;
 import org.lele.book.shop.commen.param.user.UserLoginEntity;
 import org.lele.book.shop.commen.param.user.UserRegisterEntity;
+import org.lele.book.shop.domain.BookUser;
 import org.lele.book.shop.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,7 +48,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity login(UserLoginEntity entity, HttpServletRequest httpRequest, HttpServletResponse response) {
+    public ResponseEntity login(UserLoginEntity entity, HttpServletRequest httpRequest) {
         entity.checkAndFull();
         String sso = userService.userLogin(entity.password, entity.email);
         logger.info("user [{}->{}] login", entity.email, sso);
@@ -61,7 +65,10 @@ public class UserController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity list() {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity list(HttpServletRequest httpRequest) {
+        String sso = CookieUtil.get(httpRequest, "user-sso");
+        logger.info("list user -> [sso:{}]", sso);
+        List<BookUser> userList = userService.listUser(sso);
+        return ResponseEntity.ok(userList);
     }
 }

@@ -5,7 +5,9 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
 import org.lele.book.shop.commen.Assert;
 import org.lele.book.shop.commen.Sso;
+import org.lele.book.shop.commen.UserCheck;
 import org.lele.book.shop.dao.UserDao;
+import org.lele.book.shop.domain.BookOrder;
 import org.lele.book.shop.domain.BookUser;
 import org.lele.book.shop.exception.BookShopSystemException;
 import org.lele.book.shop.exception.Errors;
@@ -14,6 +16,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -61,8 +64,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer ssoUserId(String ssoCode) {
-        return (cache).getIfPresent(ssoCode);
+        Integer uid =  (cache).getIfPresent(ssoCode);
+        Assert.assertion(uid != null, Errors.NoSuchUser, "没有这个用户");
+        return uid;
     }
+
+    @Override
+    public BookUser getUser(String ssoCode) {
+        return this.getUser(this.ssoUserId(ssoCode));
+    }
+
 
     @Override
     public BookUser getUser(Integer userId) {
@@ -71,5 +82,12 @@ public class UserServiceImpl implements UserService {
         BookUser user = userDao.select(param);
         Assert.assertion(user != null, Errors.NoSuchOrder, "沒有這個用戶%d", userId);
         return user;
+    }
+
+    @Override
+    public List<BookUser> listUser(String sso) {
+        BookUser who = this.getUser(sso);
+        Assert.assertion(UserCheck.isAdmin(who), Errors.MethodNotAllowed, "您没有这个权限");
+        return userDao.selectList(null, null, Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 }

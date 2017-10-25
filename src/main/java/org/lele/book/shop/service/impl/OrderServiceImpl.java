@@ -42,14 +42,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrder(String sso, int bookId, int cnt, String buyName, String buyPhone, String add1, String add2) {
-        Integer userId = userService.ssoUserId(sso);
-        Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
-        BookUser user = userService.getUser(userId);
+        BookUser user = userService.getUser(sso);
         BookOrder order = new BookOrder();
         BookGood good = goodService.queryBook(bookId);
         Assert.assertion(good != null, Errors.NoSuchBook, "没有这个货物");
-
-        order.userId = userId;
+        order.userId = user.id;
         order.orderNo = OrderUtils.allocateOrderNo(System.currentTimeMillis(), serverId);
         order.bookId = bookId;
         order.state = State.Submit;
@@ -66,27 +63,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<BookOrder> listOrder(String sso) {
-        Integer userId = userService.ssoUserId(sso);
-        Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
-
-        BookUser user = userService.getUser(userId);
+        BookUser user = userService.getUser(sso);
         // admin　都可以看到
         if (user.userType == UserType.Admin || user.userType == UserType.Master) {
             return orderDao.selectList(null, null, Integer.MAX_VALUE, Long.MAX_VALUE);
         } else {
             // 只能看自己的
-            return orderDao.selectList(userId, null, Integer.MAX_VALUE, Long.MAX_VALUE);
+            return orderDao.selectList(user.id, null, Integer.MAX_VALUE, Long.MAX_VALUE);
         }
     }
 
     @Override
     public BookOrder getOrder(Long orderNo, String sso) {
-        Integer userId = userService.ssoUserId(sso);
-        Assert.assertion(userId != null, Errors.NoSuchUser, "兄弟你没有登陆, 或者已过期限的id");
-        BookUser user = userService.getUser(userId);
+        BookUser user = userService.getUser(sso);
         BookOrder order = orderDao.select(orderNo);
         Assert.assertion(order != null, Errors.NoSuchOrder, "么有这个订单");
-        if (order.userId != userId && user.userType != UserType.Admin && user.userType != UserType.Master) {
+        if (order.userId != user.id && user.userType != UserType.Admin && user.userType != UserType.Master) {
             throw new BookShopSystemException(Errors.MethodNotAllowed, "你没有权限");
         }
         return order;

@@ -3,6 +3,8 @@ package org.lele.book.shop.service;
 
 import org.lele.book.shop.domain.BookUser;
 
+import java.util.List;
+
 /**
  * @author shuly
  * @date 2017/10/21.
@@ -26,7 +28,12 @@ public interface UserService {
 
     Integer ssoUserId(String ssoCode);
 
+    BookUser getUser(String ssoCode);
+
+
     BookUser getUser(Integer userId);
+
+    List<BookUser> listUser(String sso);
 }
 
 

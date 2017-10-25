@@ -20,34 +20,38 @@ define([
             this.start()
         },
         start: function () {
-            var table = $("#dataTable").dataTable({
-                "lengthChange": false,
-                "searching": true,
-                "autoWidth": false,
-                bJQueryUI:true,
-                ajax:  "/console/user/list",
-                columns:[
-                    {"data": "id" },
-                    {"data": "email"},
-                    {"data": "userName"},
-                    {"data": "userType"},
-                    {"data": "createTime"},
-                ]
-            });
-            var resolve = this.resolve;
-            $('#dataTable tbody').on( 'click', 'tr', function () {
-                if ($(this).hasClass('selected') ) {
-                    var orderNo = $(this).children("td:first-child").html();
-                    resolve(orderNo, draw);
-                    $(this).removeClass('selected');
-                }
-                else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            } );
+            this.initTable(this);
         },
-        solve: function () {
+        initTable: function (GCD) {
+            ShulyTool.run("/console/user/list", "GET", false, null, function (data) {
+                var table = $("#dataTable").dataTable({
+                    "lengthChange": false,
+                    "searching": true,
+                    "autoWidth": false,
+                    bJQueryUI:true,
+                    data: data,
+                    columns:[
+                        {"data": "id" },
+                        {"data": "email"},
+                        {"data": "userName"},
+                        {"data": "userType"},
+                        {"data": "createTime"},
+                    ]
+                });
+                $('#dataTable tbody').on( 'click', 'tr', function () {
+                    if ($(this).hasClass('selected') ) {
+                        var userId = $(this).children("td:first-child").html();
+                        GCD.solve(userId);
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            }, null);
+        },
+        solve: function(GCD) {
 
         },
         destroy: function () {

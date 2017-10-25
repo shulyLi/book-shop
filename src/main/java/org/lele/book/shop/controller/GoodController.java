@@ -69,8 +69,6 @@ public class GoodController {
     public ResponseEntity listSummary(){
         logger.info("book manger query");
         List<BookGoodSummary> summaryList = goodService.queryAll();
-        Map<String, Object> ans = Maps.newHashMap();
-        ans.put("data", summaryList);
-        return ResponseEntity.ok(ans);
+        return ResponseEntity.ok(summaryList);
     }
 }

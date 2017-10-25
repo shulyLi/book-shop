@@ -19,5 +19,5 @@ public interface UserDao {
     int update(Map map);
 
     BookUser select(Map map);
-    List<BookUser> selectList(@Param("name") String name, @Param("email") String email, @Param("size") int size, @Param("flag") int flag);
+    List<BookUser> selectList(@Param("userName") String name, @Param("email") String email, @Param("size") int size, @Param("flag") int flag);
 }

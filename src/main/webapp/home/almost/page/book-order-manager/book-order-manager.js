@@ -25,7 +25,6 @@ define([
                 "searching": true,
                 "autoWidth": false,
                 bJQueryUI:true,
-                ajax:  "/console/order/list",
                 columns:[
                     {"data": "orderNo" },
                     {"data": "bookName"},
@@ -49,6 +48,29 @@ define([
                     $(this).addClass('selected');
                 }
             } );
+        },
+        initTable: function() {
+            ShulyTool.run("/console/order/list", "GET", false, null, function (data) {
+                var table = $('#dataTable').dataTable();
+                table.fnClearTable(); //清空一下table
+                table.fnDestroy(); //还原初始化了的datatable
+                $("#dataTable").dataTable({
+                    "lengthChange": false,
+                    "searching": true,
+                    "autoWidth": false,
+                    bJQueryUI:true,
+                    data: data,
+                    columns:[
+                        {"data": "orderNo" },
+                        {"data": "bookName"},
+                        {"data": "bookAuthor"},
+                        {"data": "cnt"},
+                        {"data": "payFee"},
+                        {"data": "state"},
+                        {"data": "createTime"},
+                    ]
+                });
+            }, null);
         },
         resolve: function (orderNo, draw) {
             ShulyTool.run("/console/order/" + orderNo, "GET", false, null, function (data) {

@@ -1,5 +1,7 @@
 package org.lele.book.shop.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.lele.book.shop.commen.BookUserJsonSerializer;
 import org.lele.book.shop.commen.StringView;
 import org.lele.book.shop.domain.help.UserType;
 
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
  * date    17-10-18
  * description:
  */
+@JsonSerialize(using = BookUserJsonSerializer.class)
 
 public class BookUser extends StringView {
     public int      id;

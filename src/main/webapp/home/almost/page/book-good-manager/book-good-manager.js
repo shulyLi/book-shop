@@ -27,13 +27,12 @@ define([
         },
 
         start: function () {
+            var resolve = this.resolve;
             var table = $("#dataTable").dataTable({
                 "lengthChange": false,
                 "searching": true,
                 "autoWidth": false,
                 bJQueryUI:true,
-                ajax:  "/console/good/list/summary",
-                rowId: 'id',
                 columns:[
                     {"data": "id" },
                     {"data": "bookName"},
@@ -44,7 +43,6 @@ define([
                     {"data": "stock"}
                 ],
             });
-            var resolve = this.resolve;
             $('#dataTable tbody').on( 'click', 'tr', function () {
                 if ($(this).hasClass('selected') ) {
                     var goodId = $(this).children("td:first-child").html();
@@ -56,6 +54,30 @@ define([
                     $(this).addClass('selected');
                 }
             } );
+            this.initTable();
+        },
+        initTable: function() {
+            ShulyTool.run("/console/good/list/summary", "GET", false, null, function (data) {
+                var table = $('#dataTable').dataTable();
+                table.fnClearTable(); //清空一下table
+                table.fnDestroy(); //还原初始化了的datatable
+                $("#dataTable").dataTable({
+                    "lengthChange": false,
+                    "searching": true,
+                    "autoWidth": false,
+                    bJQueryUI:true,
+                    data:data,
+                    columns:[
+                        {"data": "id" },
+                        {"data": "bookName"},
+                        {"data": "bookAuthor"},
+                        {"data": "price"},
+                        {"data": "sellCnt"},
+                        {"data": "tag"},
+                        {"data": "stock"}
+                    ],
+                });
+            }, null);
         },
         createBook: function () {
             console.log("create Book");
@@ -76,7 +98,6 @@ define([
             }, null);
         },
         postHttpBook: function () {
-            var start = this.start;
             var goodId =  $("#book-id").val();
             console.log("apply : " +  goodId);
             var tagStr = $("#tag").select2('val');
@@ -108,27 +129,27 @@ define([
                     $("#book-modal").modal("hide");
                 }, null);
             }
-
-            var dttable = $('#dataTable').dataTable();
-            dttable.fnClearTable(); //清空一下table
-            dttable.fnDestroy(); //还原初始化了的datatable
-            $("#dataTable").dataTable({
-                "lengthChange": false,
-                "searching": true,
-                "autoWidth": false,
-                bJQueryUI:true,
-                ajax:  "/console/good/list/summary",
-                rowId: 'id',
-                columns:[
-                    {"data": "id" },
-                    {"data": "bookName"},
-                    {"data": "bookAuthor"},
-                    {"data": "price"},
-                    {"data": "sellCnt"},
-                    {"data": "tag"},
-                    {"data": "stock"}
-                ],
-            });
+            ShulyTool.run("/console/good/list/summary", "GET", false, null, function (data) {
+                var table = $('#dataTable').dataTable();
+                table.fnClearTable(); //清空一下table
+                table.fnDestroy(); //还原初始化了的datatable
+                $("#dataTable").dataTable({
+                    "lengthChange": false,
+                    "searching": true,
+                    "autoWidth": false,
+                    bJQueryUI:true,
+                    data:data,
+                    columns:[
+                        {"data": "id" },
+                        {"data": "bookName"},
+                        {"data": "bookAuthor"},
+                        {"data": "price"},
+                        {"data": "sellCnt"},
+                        {"data": "tag"},
+                        {"data": "stock"}
+                    ],
+                });
+            }, null);
         },
         uploadPic: function () {
             console.log("uploadPic")
