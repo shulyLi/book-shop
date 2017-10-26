@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         order.bookId = bookId;
         order.state = State.Submit;
         order.cnt = cnt;
-        order.payFee = good.price * cnt + 20;
+        order.payFee = good.price * cnt + 20 * 100;
         order.payType = PayType.Arrive_PAY;
         order.receiveName = buyName;
         order.receivePhone = buyPhone;

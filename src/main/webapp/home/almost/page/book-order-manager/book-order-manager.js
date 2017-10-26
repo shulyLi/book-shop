@@ -93,7 +93,7 @@ define([
                     "<th>"+data.bookName+"</th>" +
                     "<th ><img class='img-responsive' width='100%' src="+data.bookHead+" ></th>" +
                     "<th>"+data.bookAuthor+"</th>" +
-                    "<th>"+data.bookPrice+"</th>" +
+                    "<th>"+data.bookPrice / 100.+"</th>" +
                     "<th>" +
                         data.cnt  + "本"+
                     "</th>" +
@@ -101,7 +101,7 @@ define([
             $("#order-modal #goodTable tbody").empty();
             $("#order-modal #goodTable tbody").append(str);
             $("#dealPriceTable").empty();
-            $("#dealPriceTable").append('<tr><th style="width:50%">商品价格:</th><td>￥'+ data.bookPrice +'</td></tr>');
+            $("#dealPriceTable").append('<tr><th style="width:50%">商品单价:</th><td>￥'+ data.bookPrice/100.0 +'</td></tr>');
             $("#dealPriceTable").append('<tr><th style="width:50%">运费:</th><td>￥'+ 20.0+'</td></tr>');
             $("#dealPriceTable").append('<tr><th style="width:50%">总价:</th><td>￥'+ data.payFee +'</td></tr>');
         },

@@ -3,6 +3,41 @@ define([
     'almost/page/book-detail/MyArea',
     'text!almost/page/book-detail/book-detail.html', 'ShulyTool'
 ], function ($, cookie, _, Backbone, MyArea, html, ShulyTool) {
+    var drawDetail = function(data) {
+        $("#bookHead").attr("src", data.bookHead);
+        $("#bookAuthor a").text(data.bookAuthor);
+        $("#stock a").text(data.stock);
+        $("#sellCnt a").text(data.sellCnt);
+        $("#price a").text(data.price);
+        $("#betterPart a").text(data.betterPart);
+        $("#bookName").text(data.bookName);
+        $("#tag").text(data.tag);
+        $("#book-id").val(data.id);
+        var str =　bookTableStr(data);
+        $("#dealModle #goodTable tbody").empty();
+        $("#dealModle #goodTable tbody").append(str);
+        $('#dealNum').bind('input propertychange', function(){
+            var num=$(this).val();
+            alert(1)
+            $("#dealPriceTable").empty();
+            $("#dealPriceTable").append('<tr><th style="width:50%">商品价格:</th><td>￥'+ data.price  / 100.0+'</td></tr>');
+            $("#dealPriceTable").append('<tr><th style="width:50%">运费:</th><td>￥'+ 20.00+'</td></tr>');
+            $("#dealPriceTable").append('<tr><th style="width:50%">总价:</th><td>￥'+(2000 + data.price * num) / 100.0 +'</td></tr>');
+        });
+    };
+    var bookTableStr=  function (good) {
+        return "<tr class='warning'>" +
+            "<th>"+good.bookName+"</th>" +
+            "<th ><img class='img-responsive' width='100%' src="+good.bookHead+" ></th>" +
+            "<th>"+good.bookAuthor+"</th>" +
+            "<th>"+good.price / 100.+"</th>" +
+            "<th>" +
+            "<div class='input-group'>" +
+            "<input id = 'dealNum'type='text' " + "class='form-control'>" +
+            "<span class='input-group-addon'>本</span></div>"+
+            "</th>" +
+            "</tr>";
+    };
     return Backbone.View.extend({
         id: 'book-detail',
         fragment: document.createDocumentFragment(),
@@ -24,29 +59,8 @@ define([
         },
         start: function () {
             var goodId = window.location.hash.substring(20);
-            var trans = this;
-
             ShulyTool.run("/console/good/" + goodId, "GET", false, null, function (data) {
-                $("#bookHead").attr("src", data.bookHead);
-                $("#bookAuthor a").text(data.bookAuthor);
-                $("#stock a").text(data.stock);
-                $("#sellCnt a").text(data.sellCnt);
-                $("#price a").text(data.price);
-                $("#betterPart a").text(data.betterPart);
-                $("#bookName").text(data.bookName);
-                $("#tag").text(data.tag);
-                trans.good = data;
-                $("#book-id").val(trans.good.id);
-                var str =　trans.bookTableStr(trans.good);
-                $("#dealModle #goodTable tbody").empty();
-                $("#dealModle #goodTable tbody").append(str);
-                $('#dealNum').bind('input propertychange', function(){
-                    var num=$(this).val();
-                    $("#dealPriceTable").empty();
-                    $("#dealPriceTable").append('<tr><th style="width:50%">商品价格:</th><td>￥'+ trans.good.price * 0.01+'</td></tr>');
-                    $("#dealPriceTable").append('<tr><th style="width:50%">运费:</th><td>￥'+ 20.0+'</td></tr>');
-                    $("#dealPriceTable").append('<tr><th style="width:50%">总价:</th><td>￥'+(20 + trans.good.price * num * 0.01) +'</td></tr>');
-                });
+                drawDetail(data);
             }, null);
             $("#deal-submit").click(this.dealSubmit);
         },
@@ -76,19 +90,6 @@ define([
                 ShulyTool.sleep(300);
                 window.location.href = "#book-order-manager"
             }, null);
-        },
-        bookTableStr: function (good) {
-            return "<tr class='warning'>" +
-            "<th>"+good.bookName+"</th>" +
-            "<th ><img class='img-responsive' width='100%' src="+good.bookHead+" ></th>" +
-            "<th>"+good.bookAuthor+"</th>" +
-            "<th>"+good.price+"</th>" +
-            "<th>" +
-            "<div class='input-group'>" +
-                "<input id = 'dealNum'type='text' " + "class='form-control'>" +
-                "<span class='input-group-addon'>本</span></div>"+
-            "</th>" +
-            "</tr>";
         },
         destroy: function () {
             console.log("destroy book-detail");
