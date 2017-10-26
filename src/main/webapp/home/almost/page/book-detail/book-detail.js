@@ -10,15 +10,30 @@ define([
         $("#sellCnt a").text(data.sellCnt);
         $("#price a").text(data.price);
         $("#betterPart a").text(data.betterPart);
-        $("#bookName").text(data.bookName);
-        $("#tag").text(data.tag);
+        $("#bookName").text("《" + data.bookName + "》");
+        $("#bookDetail").text(data.detail);
+        $("#book-part").html(data.index.replace(/\n/g, "<br>"));
+        /**
+            <span class="label label-danger">UI Design</span>
+         */
+        var tagClass = ['label-primary', 'label-info', 'label-success', 'label-danger', 'label-warning'];
+        var tagStr = "";
+        var tagList = data.tag.split(",");
+        if (tagList.length === 1 && tagList[0] === "") {
+            tagList.push("无标签");
+        }
+        $.each(tagList, function (idx, value) {
+            var item = parseInt((Math.random() * 100)) % 5;
+            tagStr += '<span class="label ' + tagClass[item] + '">' + value + '</span> ';
+        });
+
+        $("#tag").html(tagStr);
         $("#book-id").val(data.id);
         var str =　bookTableStr(data);
         $("#dealModle #goodTable tbody").empty();
         $("#dealModle #goodTable tbody").append(str);
         $('#dealNum').bind('input propertychange', function(){
             var num=$(this).val();
-            alert(1)
             $("#dealPriceTable").empty();
             $("#dealPriceTable").append('<tr><th style="width:50%">商品价格:</th><td>￥'+ data.price  / 100.0+'</td></tr>');
             $("#dealPriceTable").append('<tr><th style="width:50%">运费:</th><td>￥'+ 20.00+'</td></tr>');
