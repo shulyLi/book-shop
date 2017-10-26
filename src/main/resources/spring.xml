@@ -22,6 +22,7 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="org.lele.book.shop.dao"/>
     </bean>
+
     <context:component-scan base-package="org.lele.book.shop.service"/>
     <context:component-scan base-package="org.lele.book.shop.dao"/>
     <import resource="databases.xml"/>

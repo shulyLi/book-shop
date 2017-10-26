@@ -29,6 +29,7 @@ define([
                     "searching": true,
                     "autoWidth": false,
                     bJQueryUI:true,
+                    order: [[ 0, "desc" ]],
                     data: data,
                     columns:[
                         {"data": "id" },

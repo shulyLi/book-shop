@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     private int serverId = 1;
 
     @Override
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional
     public void createOrder(String sso, int bookId, int cnt, String buyName, String buyPhone, String add1, String add2) {
         BookUser user = userService.getUser(sso);
         BookOrder order = new BookOrder();

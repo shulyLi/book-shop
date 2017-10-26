@@ -2,6 +2,76 @@ define([
     'jquery', 'underscore', 'backbone',
     'text!almost/page/book-good-manager/book-good-manager.html', 'ShulyTool'
 ], function ($, _, Backbone, html, ShulyTool) {
+    var what = function () {
+
+        var table = $("#dataTable").dataTable({
+            "lengthChange": false,
+            "searching": true,
+            "autoWidth": false,
+            bJQueryUI: true,
+            order: [[0, "desc"]],
+            columns: [
+                {"data": "id"},
+                {"data": "bookName"},
+                {"data": "bookAuthor"},
+                {"data": "price"},
+                {"data": "sellCnt"},
+                {"data": "tag"},
+                {"data": "stock"}
+            ],
+        });
+        $('#dataTable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                var goodId = $(this).children("td:first-child").html();
+                resolve(goodId);
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    }
+    var resolve =  function(goodId) {
+        console.log("changeId : " +  goodId);
+        $("#book-id").val(goodId);
+        ShulyTool.run("/console/good/" + goodId, "GET", false, null, function (data) {
+            $("#book-modal").modal("show");
+            $.each(data, function(name, value) {
+                if (name === 'id' || name === "bookHead") return;
+                if (name === 'tag') {
+                    $("#tag").select2("val", value.split(','));
+                } else {
+                    $("#" + name).val(value)
+                }
+            });
+
+        }, null);
+    };
+    var initTable= function() {
+        ShulyTool.run("/console/good/list/summary", "GET", false, null, function (data) {
+            var table = $('#dataTable').dataTable();
+            table.fnClearTable(); //清空一下table
+            table.fnDestroy(); //还原初始化了的datatable
+            $("#dataTable").dataTable({
+                "lengthChange": false,
+                "searching": true,
+                "autoWidth": false,
+                bJQueryUI:true,
+                order: [[ 0, "desc" ]],
+                data:data,
+                columns:[
+                    {"data": "id" },
+                    {"data": "bookName"},
+                    {"data": "bookAuthor"},
+                    {"data": "price"},
+                    {"data": "sellCnt"},
+                    {"data": "tag"},
+                    {"data": "stock"}
+                ],
+            });
+        }, null);
+    };
     return Backbone.View.extend({
         id: 'book-good-manager',
         fragment: document.createDocumentFragment(),
@@ -25,76 +95,14 @@ define([
             $("#good-submit").unbind("click");
             $("#good-submit").click(this.postHttpBook);
         },
-
         start: function () {
-            var resolve = this.resolve;
-            var table = $("#dataTable").dataTable({
-                "lengthChange": false,
-                "searching": true,
-                "autoWidth": false,
-                bJQueryUI:true,
-                columns:[
-                    {"data": "id" },
-                    {"data": "bookName"},
-                    {"data": "bookAuthor"},
-                    {"data": "price"},
-                    {"data": "sellCnt"},
-                    {"data": "tag"},
-                    {"data": "stock"}
-                ],
-            });
-            $('#dataTable tbody').on( 'click', 'tr', function () {
-                if ($(this).hasClass('selected') ) {
-                    var goodId = $(this).children("td:first-child").html();
-                    resolve(goodId);
-                    $(this).removeClass('selected');
-                }
-                else {
-                    table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            } );
-            this.initTable();
-        },
-        initTable: function() {
-            ShulyTool.run("/console/good/list/summary", "GET", false, null, function (data) {
-                var table = $('#dataTable').dataTable();
-                table.fnClearTable(); //清空一下table
-                table.fnDestroy(); //还原初始化了的datatable
-                $("#dataTable").dataTable({
-                    "lengthChange": false,
-                    "searching": true,
-                    "autoWidth": false,
-                    bJQueryUI:true,
-                    data:data,
-                    columns:[
-                        {"data": "id" },
-                        {"data": "bookName"},
-                        {"data": "bookAuthor"},
-                        {"data": "price"},
-                        {"data": "sellCnt"},
-                        {"data": "tag"},
-                        {"data": "stock"}
-                    ],
-                });
-            }, null);
+            what();
+            initTable();
         },
         createBook: function () {
             console.log("create Book");
             $("#book-id").val("");
             $("#book-modal").modal("show");
-        },
-        resolve: function(goodId) {
-            console.log("changeId : " +  goodId);
-            $("#book-id").val(goodId);
-            ShulyTool.run("/console/good/" + goodId, "GET", false, null, function (data) {
-                $("#book-modal").modal("show");
-                $.each(data, function(name, value) {
-                    if (name === 'id' || name === "bookHead") return;
-                    if (name === 'tag') return;
-                    $("#" + name).val(value)
-                });
-            }, null);
         },
         postHttpBook: function () {
             var goodId =  $("#book-id").val();
@@ -128,27 +136,7 @@ define([
                     $("#book-modal").modal("hide");
                 }, null);
             }
-            ShulyTool.run("/console/good/list/summary", "GET", false, null, function (data) {
-                var table = $('#dataTable').dataTable();
-                table.fnClearTable(); //清空一下table
-                table.fnDestroy(); //还原初始化了的datatable
-                $("#dataTable").dataTable({
-                    "lengthChange": false,
-                    "searching": true,
-                    "autoWidth": false,
-                    bJQueryUI:true,
-                    data:data,
-                    columns:[
-                        {"data": "id" },
-                        {"data": "bookName"},
-                        {"data": "bookAuthor"},
-                        {"data": "price"},
-                        {"data": "sellCnt"},
-                        {"data": "tag"},
-                        {"data": "stock"}
-                    ],
-                });
-            }, null);
+            initTable();
         },
         uploadPic: function () {
             console.log("uploadPic")

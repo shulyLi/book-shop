@@ -25,6 +25,7 @@ define([
                 "searching": true,
                 "autoWidth": false,
                 bJQueryUI:true,
+                order: [[ 0, "desc" ]],
                 columns:[
                     {"data": "orderNo" },
                     {"data": "bookName"},
@@ -61,6 +62,7 @@ define([
                     "autoWidth": false,
                     bJQueryUI:true,
                     data: data,
+                    order: [[ 0, "desc" ]],
                     columns:[
                         {"data": "orderNo" },
                         {"data": "bookName"},

@@ -7,6 +7,7 @@ import org.lele.book.shop.dao.GoodDao;
 import org.lele.book.shop.domain.BookGood;
 import org.lele.book.shop.domain.BookGoodSummary;
 import org.lele.book.shop.domain.BookUser;
+import org.lele.book.shop.exception.BookShopSystemException;
 import org.lele.book.shop.exception.Errors;
 import org.lele.book.shop.service.GoodService;
 import org.lele.book.shop.service.UserService;
@@ -67,7 +68,6 @@ public class GoodServiceImpl implements GoodService {
         goodDao.update(good.toMap());
     }
     @Override
-    @Transactional
     public void reduceStock(int goodId, int sell){
         goodDao.hadSell(goodId, sell);
     }
