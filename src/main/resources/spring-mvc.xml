@@ -20,8 +20,4 @@
             </list>
         </property>
     </bean>
-    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
-    <bean id = "multipartResolver"
-      class = "org.springframework.web.multipart.support.StandardServletMultipartResolver" >
-    </bean>
 </beans>

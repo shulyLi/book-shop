@@ -38,7 +38,10 @@ define([
         ShulyTool.run("/console/good/" + goodId, "GET", false, null, function (data) {
             $("#book-modal").modal("show");
             $.each(data, function(name, value) {
-                if (name === 'id' || name === "bookHead") return;
+                if (name === 'id') return
+                if (name === 'bookHead') {
+                    $("#bookHead").attr("src", value);
+                }
                 if (name === 'tag') {
                     $("#tag").select2("val", value.split(','));
                 } else {
@@ -138,7 +141,8 @@ define([
             initTable();
         },
         uploadPic: function () {
-            var formData = new FormData($( "#upload-form" )[0]);
+            var formData = new FormData();
+            formData.append("picture", $( "#choose-pic" )[0].files[0]);
             $.ajax({
                 url : "/console/upload/book/head",
                 type: 'POST',
@@ -148,6 +152,7 @@ define([
                 contentType: false,
                 processData: false,
                 success:function(data,textStatus,jqXHR){
+                    $("#bookHead").attr("src", data);
                 },
                 error:function(xhr,textStatus){
                     console.log(xhr);
