@@ -3,6 +3,7 @@ package org.lele.book.shop.controller;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.lele.book.shop.commen.Assert;
+import org.lele.book.shop.commen.CookieUtil;
 import org.lele.book.shop.commen.JSON;
 import org.lele.book.shop.commen.param.good.CreateGoodParam;
 import org.lele.book.shop.commen.param.good.IndexParam;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -37,16 +39,19 @@ public class GoodController {
     @Resource
     private GoodService goodService;
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(CreateGoodParam param){
+    public ResponseEntity create(CreateGoodParam param,  HttpServletRequest request){
+        String sso = CookieUtil.get(request, "user-sso");
         param.checkAndFull();
-        goodService.createBook(param);
+        goodService.createBook(sso, param);
         return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity update(@PathVariable("id") Integer id, UpdateGoodParam param){
+    public ResponseEntity update(@PathVariable("id") Integer id, UpdateGoodParam param,  HttpServletRequest request){
+        Assert.assertion(id != null, Errors.InvalidArgument, "id is null");
+        String sso = CookieUtil.get(request, "user-sso");
         param.id = id;
-        goodService.updateBook(param);
+        goodService.updateBook(sso, param);
         return ResponseEntity.noContent().build();
     }
 
@@ -66,9 +71,10 @@ public class GoodController {
     }
 
     @RequestMapping(value = "/list/summary", method = RequestMethod.GET)
-    public ResponseEntity listSummary(){
+    public ResponseEntity listSummary( HttpServletRequest request){
+        String sso = CookieUtil.get(request, "user-sso");
         logger.info("book manger query");
-        List<BookGoodSummary> summaryList = goodService.queryAll();
+        List<BookGoodSummary> summaryList = goodService.queryAll(sso);
         return ResponseEntity.ok(summaryList);
     }
 }

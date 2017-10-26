@@ -59,9 +59,7 @@ public class OrderController {
     public ResponseEntity listOrder(HttpServletRequest request){
         String sso = CookieUtil.get(request, "user-sso");
         logger.info("list order [{}]", sso);
-        Map<String, Object> ans = Maps.newHashMap();
-        ans.put("data", orderService.listOrder(sso));
-        return ResponseEntity.ok(ans);
+        return ResponseEntity.ok( orderService.listOrder(sso));
     }
 
     @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)

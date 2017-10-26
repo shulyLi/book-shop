@@ -83,7 +83,6 @@ define([
             console.log("create Book");
             $("#book-id").val("");
             $("#book-modal").modal("show");
-
         },
         resolve: function(goodId) {
             console.log("changeId : " +  goodId);

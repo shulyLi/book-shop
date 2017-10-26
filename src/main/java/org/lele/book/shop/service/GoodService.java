@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface GoodService {
     List<BookGoodSummary> buildIndex(String name, String[] tag, int page);
-    List<BookGoodSummary> queryAll();
-
+    
+    List<BookGoodSummary> queryAll(String sso);
     BookGood queryBook(Integer id);
 
-    void createBook(BookGood good);
+    void createBook(String sso, BookGood good);
 
-    void updateBook(BookGood good);
+    void updateBook(String sso, BookGood good);
 }

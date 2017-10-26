@@ -48,6 +48,7 @@ define([
                     $(this).addClass('selected');
                 }
             } );
+            this.initTable();
         },
         initTable: function() {
             ShulyTool.run("/console/order/list", "GET", false, null, function (data) {

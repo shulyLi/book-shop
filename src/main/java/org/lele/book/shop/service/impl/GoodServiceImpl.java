@@ -2,11 +2,14 @@ package org.lele.book.shop.service.impl;
 
 import org.lele.book.shop.commen.Assert;
 import org.lele.book.shop.commen.JSON;
+import org.lele.book.shop.commen.UserCheck;
 import org.lele.book.shop.dao.GoodDao;
 import org.lele.book.shop.domain.BookGood;
 import org.lele.book.shop.domain.BookGoodSummary;
+import org.lele.book.shop.domain.BookUser;
 import org.lele.book.shop.exception.Errors;
 import org.lele.book.shop.service.GoodService;
+import org.lele.book.shop.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,7 +24,8 @@ public class GoodServiceImpl implements GoodService {
 
     @Resource
     private GoodDao goodDao;
-
+    @Resource
+    private UserService userService;
     private static int pageSize = 10;
 
     @Override
@@ -30,7 +34,9 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    public List<BookGoodSummary> queryAll() {
+    public List<BookGoodSummary> queryAll(String sso) {
+        BookUser user = userService.getUser(sso);
+        Assert.assertion(UserCheck.isAdmin(user), Errors.MethodNotAllowed, "权限不足");
         return goodDao.selectList(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
@@ -42,12 +48,16 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    public void createBook(BookGood good) {
+    public void createBook(String sso, BookGood good) {
+        BookUser user = userService.getUser(sso);
+        Assert.assertion(UserCheck.isAdmin(user), Errors.MethodNotAllowed, "权限不足");
         goodDao.insert(good);
     }
 
     @Override
-    public void updateBook(BookGood good) {
+    public void updateBook(String sso, BookGood good) {
+        BookUser user = userService.getUser(sso);
+        Assert.assertion(UserCheck.isAdmin(user), Errors.MethodNotAllowed, "权限不足");
         goodDao.update(good.toMap());
     }
 }
