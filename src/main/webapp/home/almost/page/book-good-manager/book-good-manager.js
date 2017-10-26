@@ -78,9 +78,7 @@ define([
         $pageWrapper: $('#page-wrapper'),
         template: _.template(html),
         events: {
-            "click #book-pic-submit": "uploadPic",
             "click #book-create" : "createBook",
-            "click #good-submit" : "postHttpBook"
         },
         initialize: function () {
             this.render();
@@ -94,6 +92,7 @@ define([
             this.start();
             $("#good-submit").unbind("click");
             $("#good-submit").click(this.postHttpBook);
+            $("#book-pic-submit").click(this.uploadPic);
         },
         start: function () {
             what();
@@ -139,7 +138,28 @@ define([
             initTable();
         },
         uploadPic: function () {
-            console.log("uploadPic")
+            var formData = new FormData($( "#upload-form" )[0]);
+            $.ajax({
+                url : "/console/upload/book/head",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(data,textStatus,jqXHR){
+                },
+                error:function(xhr,textStatus){
+                    console.log(xhr);
+                    if (xhr.responseJSON.err === "NoSuchUser") {
+                        window.location.href = "/view/login.html";
+                        return
+                    }
+                    alert("错误代码:" + xhr.status + "\n具体错误:" + xhr.responseJSON.err+ "\n具体信息:" + xhr.responseJSON.msg);
+                },
+                complete:function() {
+                }
+            });
         },
 
         destroy: function () {
