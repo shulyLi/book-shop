@@ -36,6 +36,13 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity getMyInfo(HttpServletRequest request) {
+        String sso = CookieUtil.get(request, "user-sso");
+        logger.info("user [{}] get Myself", sso);
+        return ResponseEntity.ok(userService.getUser(sso));
+    }
+
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity register(UserRegisterEntity entity) {
