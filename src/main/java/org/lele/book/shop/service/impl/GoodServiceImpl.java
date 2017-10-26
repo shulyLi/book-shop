@@ -11,6 +11,7 @@ import org.lele.book.shop.exception.Errors;
 import org.lele.book.shop.service.GoodService;
 import org.lele.book.shop.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -64,5 +65,10 @@ public class GoodServiceImpl implements GoodService {
         BookUser user = userService.getUser(sso);
         Assert.assertion(UserCheck.isAdmin(user), Errors.MethodNotAllowed, "权限不足");
         goodDao.update(good.toMap());
+    }
+    @Override
+    @Transactional
+    public void reduceStock(int goodId, int sell){
+        goodDao.hadSell(goodId, sell);
     }
 }

@@ -97,7 +97,7 @@
     </update>
     <update id="hadSell" parameterType="int">
         update book_good
-        set sell_cnt = sell_cnt + 1
+        set sell_cnt = sell_cnt + #{cnt}
         WHERE id = #{id}
     </update>
 

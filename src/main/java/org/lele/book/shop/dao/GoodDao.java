@@ -17,7 +17,7 @@ import java.util.Map;
 public interface GoodDao {
     int insert(BookGood good);
     int update(Map map);
-    int hadSell(@Param("id") int id);
+    int hadSell(@Param("id") int id, @Param("sell") int sell);
     BookGood select(@Param("id") int id);
     List<BookGoodSummary> selectIndex(@Param("name") String name, @Param("tag")String tag, @Param("l") int l, @Param("r") int r);
     List<BookGoodSummary> selectList(@Param("size") int size, @Param("flag") int flag);

@@ -14,6 +14,7 @@ public enum Errors {
     MalformedJson(400, "MalformedJson", "The JSON you provided was not well-formed or did not validate against our published schema."),
     EntityTooLarge(400, "EntityTooLarge", "Your proposed content exceeds the maximum allowed order size."),
     OperationAborted(409, "OperationAborted", "A conflicting conditional operation is currently in progress against this resource."),
+    LowerStock(409, "LowerStock", "the book^stock is not Enough."),
     RequestTimeout(400, "RequestTimeout", "Your socket connection to the server was not read from or written to within the timeout period."),
     ConnectionLoss(400, "ConnectionLoss", "Your socket connection to the server may be lost."),
     InvalidArgument(400, "InvalidArgument", "One of your provided argument is malformed or otherwise invalid."),

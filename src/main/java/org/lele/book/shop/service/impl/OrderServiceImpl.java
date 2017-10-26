@@ -16,6 +16,8 @@ import org.lele.book.shop.service.OrderService;
 import org.lele.book.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -41,11 +43,13 @@ public class OrderServiceImpl implements OrderService {
     private int serverId = 1;
 
     @Override
+    @Transactional(propagation = Propagation.NESTED)
     public void createOrder(String sso, int bookId, int cnt, String buyName, String buyPhone, String add1, String add2) {
         BookUser user = userService.getUser(sso);
         BookOrder order = new BookOrder();
         BookGood good = goodService.queryBook(bookId);
         Assert.assertion(good != null, Errors.NoSuchBook, "没有这个货物");
+        Assert.assertion(good.stock > cnt, Errors.LowerStock, "{} now is {}, need{}", bookId, good.stock, cnt);
         order.userId = user.id;
         order.orderNo = OrderUtils.allocateOrderNo(System.currentTimeMillis(), serverId);
         order.bookId = bookId;
@@ -59,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
         order.addressTail = add2;
         order.makeDetail(user, good);
         orderDao.insert(order);
+        goodService.reduceStock(bookId, cnt);
     }
 
     @Override
