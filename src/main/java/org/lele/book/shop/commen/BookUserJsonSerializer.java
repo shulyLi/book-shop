@@ -25,10 +25,11 @@ public class BookUserJsonSerializer extends JsonSerializer<BookUser> {
         json.writeStringField("userHead", user.userHead);
         json.writeStringField("userType", user.userType.toString());
         json.writeStringField("createTime", LocalDateTimeUtil.transBasicString(user.createTime));
-
         json.writeArrayFieldStart("power");
+        for(String item : UserTypePower.powers(user)) {
+            json.writeString(item);
+        }
         json.writeEndArray();
-
         json.writeEndObject();
     }
 }

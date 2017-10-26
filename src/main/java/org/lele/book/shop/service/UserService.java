@@ -30,6 +30,7 @@ public interface UserService {
 
     BookUser getUser(String ssoCode);
 
+    BookUser getMyIgnore(String sso);
 
     BookUser getUser(Integer userId);
 

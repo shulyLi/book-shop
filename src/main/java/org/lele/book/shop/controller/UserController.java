@@ -40,7 +40,8 @@ public class UserController {
     public ResponseEntity getMyInfo(HttpServletRequest request) {
         String sso = CookieUtil.get(request, "user-sso");
         logger.info("user [{}] get Myself", sso);
-        return ResponseEntity.ok(userService.getUser(sso));
+        BookUser user = userService.getMyIgnore(sso);
+        return user == null ? ResponseEntity.ok("null") : ResponseEntity.ok(user);
     }
 
 

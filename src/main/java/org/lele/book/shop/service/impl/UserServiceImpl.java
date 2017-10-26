@@ -76,6 +76,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public BookUser getMyIgnore(String sso) {
+        Integer uid =  (cache).getIfPresent(sso);
+        if (uid == null) return null;
+        Map<String, Object> param = Maps.newHashMap();
+        param.put("id", uid);
+        return userDao.select(param);
+    }
+    @Override
     public BookUser getUser(Integer userId) {
         Map<String, Object> param = Maps.newHashMap();
         param.put("id", userId);

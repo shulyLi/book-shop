@@ -28,8 +28,8 @@ define([
                 alert("郵箱长度[4,)");
                 return ;
             }
-            if(name.length < 4){
-                alert("名字长度[4,)");
+            if(name.length < 2){
+                alert("名字长度[2,)");
                 return ;
             }
             if(word === null || rewd === null ||word !== rewd){
