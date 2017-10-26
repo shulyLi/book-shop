@@ -108,6 +108,9 @@
 
     <select id="selectIndex" parameterType="map" resultMap="GoodSummary">
         <include refid="sqlSummary"/>
+        WHERE
+          `book_name` LIKE #{name}
+          and tag LIKE #{tag}
         ORDER by sell_cnt desc
         limit #{l}, #{r}
     </select>

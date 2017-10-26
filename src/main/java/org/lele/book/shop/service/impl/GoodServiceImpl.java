@@ -30,7 +30,12 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     public List<BookGoodSummary> buildIndex(String name, String[] tag, int page) {
-        return  goodDao.selectIndex(page * pageSize, pageSize );
+        String likeName = "%" + name + "%";
+        StringBuilder likeTag  = new StringBuilder().append("%");
+        for(String one : tag) {
+            likeTag.append(one).append("%");
+        }
+        return  goodDao.selectIndex(likeName, likeTag.toString(), page * pageSize, pageSize );
     }
 
     @Override

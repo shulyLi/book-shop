@@ -19,6 +19,6 @@ public interface GoodDao {
     int update(Map map);
     int hadSell(@Param("id") int id);
     BookGood select(@Param("id") int id);
-    List<BookGoodSummary> selectIndex(@Param("l") int l, @Param("r") int r);
+    List<BookGoodSummary> selectIndex(@Param("name") String name, @Param("tag")String tag, @Param("l") int l, @Param("r") int r);
     List<BookGoodSummary> selectList(@Param("size") int size, @Param("flag") int flag);
 }

@@ -1,7 +1,5 @@
 package org.lele.book.shop.controller;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.lele.book.shop.commen.Assert;
 import org.lele.book.shop.commen.CookieUtil;
 import org.lele.book.shop.commen.JSON;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * author  shuly

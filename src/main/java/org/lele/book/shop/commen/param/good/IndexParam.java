@@ -12,8 +12,8 @@ import org.springframework.util.StringUtils;
  */
 public class IndexParam implements ControllerParam {
     public int      page;
-    public String[] tags;
-    public String   name;
+    public String[] tags = new String[0];
+    public String   name = "";
 
 
     @Override
@@ -29,6 +29,7 @@ public class IndexParam implements ControllerParam {
         if (!StringUtils.isEmpty(tags)) {
             this.tags = tags.split(",");
         }
+
     }
 
     public void setName(String name) {
